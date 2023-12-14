@@ -10,7 +10,9 @@ export const BarCode: React.FC<BarCodeProps> = ({ additionalProp }) => {
 
   return (
     <>
-      <Barcode value={barcodeData} />
+      <Barcode value={barcodeData}   width={2} 
+  height={50}
+  fontSize={12} background="transparent"/>
     </>
   );
 };
