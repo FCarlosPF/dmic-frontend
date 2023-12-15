@@ -1,0 +1,11 @@
+.title{
+    background-color: var(--naval-blue-color);
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+.title h1{
+    color:white;
+}

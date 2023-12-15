@@ -4,8 +4,9 @@ import Container from "react-bootstrap/Container";
 import { BarCode } from "../../components/BarCode";
 import BarcodeScanner from "../../components/BarCodeScanner";
 import Banner from "../../assets/img/bannerHeader.png";
-import Logo from "../../assets/img/LOGO_Demic.png";
 import "./CatalogoChina.css";
+import Header from "../../components/Header/Header";
+import Title from "../../components/Title/Title";
 
 
 interface CatalogoItem {
@@ -120,92 +121,81 @@ export const CatalogoChina = () => {
   };
   return (
     <>
-     <div className="banner-container">
-        <img className="catalogoChina-banner" src={Banner} alt="imagen-header" />
-        <div className="overlay">
-          <img className="logo" src={Logo} alt="logo" />
-          <p className="text-banner">
-            Líder mundial en la producción de
-          </p>
-          <p className="text-banner">componentes elastoméricos de precisión
-          </p>
-        </div>
-      </div>
+      <Header />
+      <Title text="Agregar Nuevo Elemento" />
+      
       <Container className="contendor-catalogoChina">
         <section className="contenedor-add-element">
-        <h2 className="catalogoChina-title">Agregar Nuevo Elemento</h2>
-        <section className="contenedor-input">
+         
+          <section className="contenedor-input">
 
-        
-        <input
-          type="text"
-          placeholder="IQMS"
-          className="catalogoChina-input"
-          value={nuevoElemento.iqms}
-          onChange={(e) =>
-            setNuevoElemento({
-              ...nuevoElemento,
-              iqms: parseInt(e.target.value),
-            })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Familia"
-          className="catalogoChina-input"
-          value={nuevoElemento.familia}
-          onChange={(e) =>
-            setNuevoElemento({ ...nuevoElemento, familia: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Molde"
-          className="catalogoChina-input"
-          value={nuevoElemento.molde}
-          onChange={(e) =>
-            setNuevoElemento({ ...nuevoElemento, molde: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Imagen"
-          className="catalogoChina-input"
-          value={nuevoElemento.imagen}
-          onChange={(e) =>
-            setNuevoElemento({ ...nuevoElemento, imagen: e.target.value })
-          }
-        />
-        </section>
-        <button className="catalogoChina-button-add" onClick={agregarElemento}>Agregar</button>
+            <input
+              type="text"
+              placeholder="IQMS"
+              className="catalogoChina-input"
+              value={nuevoElemento.iqms}
+              onChange={(e) =>
+                setNuevoElemento({
+                  ...nuevoElemento,
+                  iqms: parseInt(e.target.value),
+                })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Familia"
+              className="catalogoChina-input"
+              value={nuevoElemento.familia}
+              onChange={(e) =>
+                setNuevoElemento({ ...nuevoElemento, familia: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Molde"
+              className="catalogoChina-input"
+              value={nuevoElemento.molde}
+              onChange={(e) =>
+                setNuevoElemento({ ...nuevoElemento, molde: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Imagen"
+              className="catalogoChina-input"
+              value={nuevoElemento.imagen}
+              onChange={(e) =>
+                setNuevoElemento({ ...nuevoElemento, imagen: e.target.value })
+              }
+            />
+          </section>
+          <button className="catalogoChina-button-add" onClick={agregarElemento}>Agregar</button>
 
         </section>
-        
-        <br />
-        <br />
+
         <hr />
         <section className="contenedor-input-search">
 
-       
-        Buscar por IQMS:
-        <input
-          type="text"
-          placeholder="Buscar por IQMS"
-          className="catalogoChina-input"
-          value={busquedaIQMS}
-          onChange={(e) => setBusquedaIQMS(parseInt(e.target.value))}
-          onKeyDown={buscarPorIQMS} // Llama a la función buscarPorIQMS cuando se presiona una tecla
-        />
-        Buscar por Molde:
-        <input
-          type="text"
-          placeholder="Buscar por Molde"
-          className="catalogoChina-input"
-          value={busquedaMolde}
-          onChange={(e) => setBusquedaMolde(e.target.value)}
-          onKeyDown={buscarPorMolde} // Llama a la función buscarPorIQMS cuando se presiona una tecla
-        />
-         </section>
+
+          Buscar por IQMS:
+          <input
+            type="text"
+            placeholder="Buscar por IQMS"
+            className="catalogoChina-input"
+            value={busquedaIQMS}
+            onChange={(e) => setBusquedaIQMS(parseInt(e.target.value))}
+            onKeyDown={buscarPorIQMS} // Llama a la función buscarPorIQMS cuando se presiona una tecla
+          />
+          Buscar por Molde:
+          <input
+            type="text"
+            placeholder="Buscar por Molde"
+            className="catalogoChina-input"
+            value={busquedaMolde}
+            onChange={(e) => setBusquedaMolde(e.target.value)}
+            onKeyDown={buscarPorMolde} // Llama a la función buscarPorIQMS cuando se presiona una tecla
+          />
+        </section>
         <hr />
         <section className="contenedor-table-catalogo">
           <table>
@@ -232,21 +222,21 @@ export const CatalogoChina = () => {
                       <img src={elemento.imagen} alt="image element" width={200} />
                     </td>
                     <td className="table-element">
-                      <BarCode additionalProp={elemento.iqms}/>
+                      <BarCode additionalProp={elemento.iqms} />
                     </td>
                     <td>
                       <button className="table-button-delete" onClick={() => eliminarElemento(elemento.iqms)}>
                         Eliminar
                       </button>
                     </td>
-                    
+
                   </tr>
-                  
+
                 );
               })}
-              
+
             </tbody>
-           {/*  <BarcodeScanner onScan={handleScan}/>
+            {/*  <BarcodeScanner onScan={handleScan}/>
             {scannedBarcode && <p>Producto encontrado con el código de barras: {scannedBarcode}</p>} */}
           </table>
           {resultadoBusqueda && (
