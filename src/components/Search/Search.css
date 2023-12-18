@@ -1,0 +1,11 @@
+search{
+   display: flex;
+   justify-content: end;
+   padding-right: 2%;
+}
+
+.input-btn{
+    background-color: var(--naval-blue-color);
+    color: white;
+    font-weight: 500;
+}

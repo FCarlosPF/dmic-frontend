@@ -4,6 +4,7 @@ import { QrCodeScanner } from "../../components/QrCodeScanner";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import "./Catalogos.css";
+import { Search } from "../../components/Search/search";
 
 export const Catalogos = () => {
 
@@ -25,6 +26,7 @@ export const Catalogos = () => {
     <>
     <Header />
     <Title text="Lista de Catalogos" />
+    <Search />
     <section className="tipo-catalogo">
       <Button variant="dark" className="btn-catalogo" onClick={handleClickChina}>
         Catalogo China

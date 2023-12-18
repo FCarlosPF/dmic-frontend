@@ -1,0 +1,143 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .banner-container {
+    position: relative;
+    width: 100%;
+    background-color: black;
+    margin-bottom: 2%;
+  }
+  
+  .catalogoChina-banner {
+    width: 100%;
+    display: block;
+    opacity: 0.3;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+  
+  .logo {
+    width: 200px;
+  }
+  
+  .text-banner {
+  margin: 0;
+    font-family: 'Times New Roman', serif; 
+    font-weight: 400;
+  }
+  
+  
+  .catalogoChina-title {
+    font-weight: bold;
+    font-family: 'Archivo Black', sans-serif;
+  }
+  .contenedor-add-element{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .contenedor-input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .contenedor-input-search{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .catalogoChina-input {
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+
+  .catalogoChina-button-add, .table-button-delete {
+    border-radius: 0.5rem;
+    background-color: #030467;
+    color: white;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    border-style: none;
+    padding: 8px;
+    width: 100%;
+  }
+ 
+  .contenedor-table-catalogo {
+    overflow-x: auto;
+    margin: 0 auto;
+    display: flex;
+    padding: 2%;    
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .table-header {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #030467;
+    color: aliceblue;
+  }
+  
+  .table-element {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    padding: 8px 15px;
+  }
+  
+  
+  .table-element img {
+    max-width: 100%;
+    height: auto;
+  }
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }  
+ 
+  tr:nth-child(odd) {
+    background-color: white;
+  }
+  
+  @media screen and (min-width: 700px) {
+    .contenedor-input {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        gap: 10px; 
+      }
+      .contenedor-input-search {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr; 
+        align-items: center;
+        gap: 10px;     
+      }
+      .catalogoChina-button-add {
+        width: 50%;
+    }
+      .logo {
+        width: 300px;
+      }
+      
+      .text-banner {
+        font-size: 1.5rem;
+    }
+  }
