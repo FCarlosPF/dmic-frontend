@@ -3,6 +3,8 @@ import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
 import Container from "react-bootstrap/Container";
 import { BarCode } from "../../components/BarCode";
 import BarcodeScanner from "../../components/BarCodeScanner";
+import FileUpload from "../../components/FileUpload";
+import FileUploadWrapper from "../../components/FileUploadWrapper";
 
 interface CatalogoItem {
   iqms: number;
@@ -105,12 +107,12 @@ export const CatalogoChina = () => {
     fetch(`http://localhost:3000/catalogoChina/iqms/${barcode}`)
       .then((response) => response.json())
       .then((product) => {
-        console.log('Producto encontrado:', product);
+        console.log("Producto encontrado:", product);
         setScannedBarcode(barcode);
         // Realiza las acciones necesarias con la información del producto
       })
       .catch((error) => {
-        console.error('Error al obtener el producto:', error);
+        console.error("Error al obtener el producto:", error);
         setScannedBarcode(null);
       });
   };
@@ -198,9 +200,7 @@ export const CatalogoChina = () => {
                     <td>
                       <img src={elemento.imagen} alt="" width={200} />
                     </td>
-                    <td>
-                      <BarCode additionalProp={elemento.iqms} />
-                    </td>
+                    <td></td>
                     <td>
                       <button onClick={() => eliminarElemento(elemento.iqms)}>
                         Eliminar
@@ -210,8 +210,6 @@ export const CatalogoChina = () => {
                 );
               })}
             </tbody>
-            <BarcodeScanner onScan={handleScan}/>
-            {scannedBarcode && <p>Producto encontrado con el código de barras: {scannedBarcode}</p>}
           </table>
           {resultadoBusqueda && (
             <div>
@@ -237,6 +235,11 @@ export const CatalogoChina = () => {
             </div>
           )}
         </div>
+        <BarcodeScanner onScan={handleScan} />
+        {scannedBarcode && (
+          <p>Producto encontrado con el código de barras: {scannedBarcode}</p>
+        )}
+        <FileUploadWrapper />
       </Container>
     </>
   );
