@@ -5,6 +5,7 @@ import { CatalogoChina } from "./pages/CatalogoChina/CatalogoChina";
 import { Account } from "./pages/Account/Account";
 import { CatalogoQueretaro } from "./pages/CatalogoQueretaro/CatalogoQueretaro";
 import { CatalogoUSA } from "./pages/CatalogoUSA/CatalogoUSA";
+import { Impresion } from "./pages/Impresion/Impresion";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/cuenta" element={<Account />} />
           <Route path="/catalogoqueretaro" element={<CatalogoQueretaro />} />
           <Route path="/catalogousa" element={<CatalogoUSA />} />
+          <Route path="/impresion" element={<Impresion />} />
         </Routes>
       </BrowserRouter>
     </>
