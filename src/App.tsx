@@ -5,7 +5,7 @@ import { CatalogoChina } from "./pages/CatalogoChina/CatalogoChina";
 import { Account } from "./pages/Account/Account";
 import { CatalogoQueretaro } from "./pages/CatalogoQueretaro/CatalogoQueretaro";
 import { CatalogoUSA } from "./pages/CatalogoUSA/CatalogoUSA";
-import { Impresion } from "./pages/Impresion/Impresion";
+import  Impresion  from "./pages/Impresion/Impresion";
 
 function App() {
   return (

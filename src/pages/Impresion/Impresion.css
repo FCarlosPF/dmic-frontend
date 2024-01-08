@@ -1,0 +1,17 @@
+.print-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+  }
+
+.print-button {
+    border-radius: 0.5rem;
+    background-color: #030467;
+    color: white;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    border-style: none;
+    padding: 8px;
+    width: 50%;
+  }
