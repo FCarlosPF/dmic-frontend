@@ -1,13 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react';
-import Quagga from 'quagga';
+// @ts-ignore
+import Quagga from "quagga";
+import React, { useEffect, useRef, useState } from 'react';
 
 interface BarcodeScannerProps {
-  onScan: (barcode: string) => void;
+  onScan: (barcode: string ) => void;
 }
 
 const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRef = useRef<HTMLDivElement|HTMLVideoElement | null>(null);
   const [error, setError] = useState<string | null>(null);
+  
 
   useEffect(() => {
     Quagga.init(
@@ -18,7 +20,7 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
           target: videoRef.current, // Cambiado de document.querySelector a videoRef.current
           constraints: {
             width: 640,
-            height: 480,
+            height: 300,
             facingMode: 'environment', // usa la cámara trasera (back camera) si está disponible
           },
         },
@@ -35,7 +37,7 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
 
         Quagga.start();
 
-        Quagga.onDetected((data) => {
+        Quagga.onDetected((data: any) => {
           const barcode = data.codeResult.code;
           onScan(barcode);
         });

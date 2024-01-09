@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
 import Container from "react-bootstrap/Container";
-import { BarCode } from "../../components/BarCode";
-import BarcodeScanner from "../../components/BarCodeScanner";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
+import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
+import BarcodeScanner from "../../components/BarCodeScanner";
 
 interface CatalogoItem {
   iqms: number;
@@ -102,11 +101,12 @@ export const CatalogoChina = () => {
   return (
     <>
       <Header />
-      <Title text="Agregar Nuevo Elemento" />
+      <Title text="Catalogo China" />
       
       <Container className="contendor-catalogoChina">
+        <h2>Agregar Nuevo elemento</h2>
         <section className="contenedor-add-element">
-         
+
           <section className="contenedor-input">
 
             <input
@@ -159,7 +159,7 @@ export const CatalogoChina = () => {
 
           Buscar por IQMS:
           <input
-            type="text"
+            type="number"
             placeholder="Buscar por IQMS"
             className="catalogoChina-input"
             value={busquedaIQMS}
@@ -201,7 +201,7 @@ export const CatalogoChina = () => {
                     <td className="table-element">
                       <img src={elemento.imagen} alt="image element" width={200} />
                     </td>
-{/*                     <td>
+                    {/*                     <td>
                       <BarCode additionalProp={elemento.iqms} />
                     </td> */}
                     <td>
@@ -216,7 +216,7 @@ export const CatalogoChina = () => {
               })}
 
             </tbody>
-  
+
           </table>
           {resultadoBusqueda && (
             <div>
@@ -242,7 +242,7 @@ export const CatalogoChina = () => {
             </div>
           )}
         </section>
-        
+
       </Container>
     </>
   );

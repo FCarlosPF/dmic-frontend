@@ -1,6 +1,9 @@
 import React from "react";
 import imagen from "../../assets/img/Etiqueta 1_page-0001.jpg";
 import "./Impresion.css";
+import Header from "../../components/Header/Header";
+import Title from "../../components/Title/Title";
+
 
 const Impresion: React.FC = () => {
   const printImage = () => {
@@ -19,6 +22,8 @@ const Impresion: React.FC = () => {
 
   return (
     <>
+      <Header />
+      <Title text="Imprimir etiqueta" />
       <div className="print-container">
         <img
           id="imageToPrint"

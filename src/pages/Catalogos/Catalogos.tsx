@@ -6,13 +6,15 @@ import Title from "../../components/Title/Title";
 import "./Catalogos.css";
 import { Search } from "../../components/Search/search";
 import BarcodeScanner from "../../components/BarCodeScanner";
+import BanderaChina from "../../assets/img/bandera_de_china.webp"
+
 
 export const Catalogos = () => {
 
   const navigate = useNavigate();
 
   const handleClickChina = () =>{
-    navigate('/catalogoChina')
+    navigate('/incoming')
   }
 
   const handleClickQueretaro = () =>{
@@ -27,8 +29,8 @@ export const Catalogos = () => {
     <>
     <Header />
     <Title text="Lista de Catalogos" />
-    <Search />
     <section className="tipo-catalogo">
+      
       <Button variant="dark" className="btn-catalogo" onClick={handleClickChina}>
         Catalogo China
       </Button>
@@ -39,7 +41,6 @@ export const Catalogos = () => {
         Catalogo Estados Unidos
       </Button>
     </section>
-    <QrCodeScanner/>
   </>
   );
 };

@@ -6,9 +6,12 @@ interface FileUploadProps {
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
+  const stage = window.location.pathname;
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [textInput, setTextInput] = useState<string>('');
   const [responseValue, setResponseValue] = useState<string | null>(null);
+
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -44,12 +47,18 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
     }
   };
 
+  function renderInputFile() {
+    return(
+      <input type="file" onChange={onFileChange} />
+    )
+  }
+
   return (
     <div>
-      <input type="file" onChange={onFileChange} />
+      {stage === "/embarque" && renderInputFile() }
       <hr />
-      <input type="text" value={textInput} onChange={onTextChange} />
-      <button onClick={onUploads}>Subir Archivo o Verificar Texto</button>
+      <input  type="text" value={textInput} onChange={onTextChange} />
+      <button  onClick={onUploads}>Subir Archivo o Verificar Texto</button>
       {responseValue && <p>Valor retornado: {responseValue}</p>}
     </div>
   );

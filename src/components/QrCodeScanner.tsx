@@ -72,7 +72,7 @@ export const QrCodeScanner: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>QR Scanning Code</h1>
+      <h3>QR Scanning Code</h3>
       {scanResult ? (
         <div>
           <p>

@@ -6,6 +6,7 @@ import { Account } from "./pages/Account/Account";
 import { CatalogoQueretaro } from "./pages/CatalogoQueretaro/CatalogoQueretaro";
 import { CatalogoUSA } from "./pages/CatalogoUSA/CatalogoUSA";
 import  Impresion  from "./pages/Impresion/Impresion";
+import { Incoming } from "./components/Stages/Incoming/Incoming";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route path="/cuenta" element={<Account />} />
           <Route path="/catalogoqueretaro" element={<CatalogoQueretaro />} />
           <Route path="/catalogousa" element={<CatalogoUSA />} />
-          <Route path="/impresion" element={<Impresion />} />
+          <Route path="/etiquetaincoming" element={<Impresion />} />
+          <Route path="/incoming" element={<Incoming />} />
         </Routes>
       </BrowserRouter>
     </>
