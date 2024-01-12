@@ -7,6 +7,7 @@ import { CatalogoQueretaro } from "./pages/CatalogoQueretaro/CatalogoQueretaro";
 import { CatalogoUSA } from "./pages/CatalogoUSA/CatalogoUSA";
 import  Impresion  from "./pages/Impresion/Impresion";
 import { Incoming } from "./components/Stages/Incoming/Incoming";
+import 'bootstrap'
 
 function App() {
   return (
