@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./Catalogo_USA_QRO.css";
+import Catalogo_USA_QRO_Gateway from "../../../gateways/Catalogo_USA_QRO_Gateway";
+import "../Catalogos.css";
 
 interface CatalogoItem {
     iqms1: number;
@@ -8,10 +9,11 @@ interface CatalogoItem {
     familia: string;
     molde1: string;
     molde2: string;
-    imagen: string;
+    foto: string;
 }
 
 export const Catalogo_USA_QRO_Form = () => {
+   
     const [nuevoElemento, setNuevoElemento] = useState<CatalogoItem>({
         iqms1: 0,
         iqms2: 0,
@@ -19,10 +21,10 @@ export const Catalogo_USA_QRO_Form = () => {
         familia: "",
         molde1: "",
         molde2: "",
-        imagen: "",
+        foto: "",
     });
     const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
-    //const catalogoGateway = new CatalogoGateway();
+    const catalogoGateway = new Catalogo_USA_QRO_Gateway();
 
 
     const agregarElemento = (event: React.FormEvent) => {
@@ -39,7 +41,7 @@ export const Catalogo_USA_QRO_Form = () => {
                 familia: "",
                 molde1: "",
                 molde2: "",
-                imagen: "",
+                foto: "",
             });
           })
           .catch((error) =>
@@ -48,9 +50,9 @@ export const Catalogo_USA_QRO_Form = () => {
       };
 
     return (
-        <section className="catalogo-usa-qro">
+        <section className="catalogo">
             <h2>Agregar Nuevo elemento</h2>
-            <form className="catalogo-usa-qro-form">
+            <form className="catalogo-form">
                 <label>
                     IQMS1
                     <input
@@ -71,7 +73,7 @@ export const Catalogo_USA_QRO_Form = () => {
                     IQMS2
                     <input
                         className="catalogo-input"
-                        type="text"
+                        type="number"
                         placeholder="IQMS2"
                         value={nuevoElemento.iqms2}
                         onChange={(e) =>
@@ -87,7 +89,7 @@ export const Catalogo_USA_QRO_Form = () => {
                     IQMS3
                     <input
                         className="catalogo-input"
-                        type="text"
+                        type="number"
                         placeholder="IQMS3"
                         value={nuevoElemento.iqms3}
                         onChange={(e) =>
@@ -150,11 +152,11 @@ export const Catalogo_USA_QRO_Form = () => {
                         className="catalogo-input"
                         type="text"
                         placeholder="imagen"
-                        value={nuevoElemento.imagen}
+                        value={nuevoElemento.foto}
                         onChange={(e) =>
                             setNuevoElemento({
                                 ...nuevoElemento,
-                                imagen: e.target.value,
+                                foto: e.target.value,
                             })
                         }
                         name="imagen"
@@ -165,7 +167,6 @@ export const Catalogo_USA_QRO_Form = () => {
 
             <hr />
         </section>
-
 
     )
 }

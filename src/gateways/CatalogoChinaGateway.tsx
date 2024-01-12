@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 interface CatalogoItem {
-  iqms: number;
-  familia: string;
+  iqms_aka: number;
+  iqms_dg: number;
   molde: string;
   imagen: string;
 }
@@ -18,6 +18,8 @@ class CatalogoChinaGateway {
   async getAll(): Promise<CatalogoItem[]> {
     try {
       const response = await axios.get<CatalogoItem[]>(this.baseURL);
+      console.log(response)
+      console.log(response.data)
       return response.data;
     } catch (error) {
       throw error;

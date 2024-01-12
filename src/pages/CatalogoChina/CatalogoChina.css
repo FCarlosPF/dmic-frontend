@@ -1,3 +1,5 @@
+
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -79,13 +81,16 @@
   }
  
   .contenedor-table-catalogo {
-    overflow-x: auto;
     margin: 0 auto;
     display: flex;
     padding: 2%;    
     width: 100%;
     align-items: center;
     justify-content: center;
+  }
+
+  .contenedor-table-catalogo table{
+     width: 100%;
   }
   
   .table-header {

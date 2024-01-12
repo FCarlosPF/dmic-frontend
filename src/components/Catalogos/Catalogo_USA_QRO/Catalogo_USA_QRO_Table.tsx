@@ -1,5 +1,3 @@
-import "./Catalogo_USA_QRO.css"
-
 export const Catalogo_USA_QRO_Table = () => {
   return (
     <section className="catalogo-usa-qro-container">

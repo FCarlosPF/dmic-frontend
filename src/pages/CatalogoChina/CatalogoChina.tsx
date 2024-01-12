@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
+import { CatalogoChinaForm } from "../../components/Catalogos/CatalogoChina/CatalogoChinaForm";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
-import BarcodeScanner from "../../components/BarCodeScanner";
+import "./CatalogoChina.css";
 
 interface CatalogoItem {
-  iqms: number;
-  familia: string;
+  iqms_aka: number;
+  iqms_dg: number;
   molde: string;
   imagen: string;
 }
+
 
 export const CatalogoChina = () => {
   const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
   const catalogoGateway = new CatalogoChinaGateway();
   const [nuevoElemento, setNuevoElemento] = useState<CatalogoItem>({
-    iqms: 0,
-    familia: "",
+    iqms_aka: 0,
+    iqms_dg: 0,
     molde: "",
     imagen: "",
   });
@@ -45,8 +47,8 @@ export const CatalogoChina = () => {
       .then((data) => {
         setCatalogo([...catalogo, data]);
         setNuevoElemento({
-          iqms: 0,
-          familia: "",
+          iqms_aka: 0,
+          iqms_dg: 0,
           molde: "",
           imagen: "",
         });
@@ -63,7 +65,7 @@ export const CatalogoChina = () => {
       .then(() => {
         // Actualizar el estado del catálogo eliminando el elemento con el ID dado
         setCatalogo((prevCatalogo) =>
-          prevCatalogo.filter((elemento) => elemento.iqms !== iqms)
+          prevCatalogo.filter((elemento) => elemento.iqms_aka !== iqms)
         );
       })
       .catch((error) => console.error("Error al eliminar elemento:", error));
@@ -102,87 +104,17 @@ export const CatalogoChina = () => {
     <>
       <Header />
       <Title text="Catalogo China" />
-      
+
       <Container className="contendor-catalogoChina">
-        <h2>Agregar Nuevo elemento</h2>
-        <section className="contenedor-add-element">
-
-          <section className="contenedor-input">
-
-            <input
-              type="text"
-              placeholder="IQMS"
-              className="catalogoChina-input"
-              value={nuevoElemento.iqms}
-              onChange={(e) =>
-                setNuevoElemento({
-                  ...nuevoElemento,
-                  iqms: parseInt(e.target.value),
-                })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Familia"
-              className="catalogoChina-input"
-              value={nuevoElemento.familia}
-              onChange={(e) =>
-                setNuevoElemento({ ...nuevoElemento, familia: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Molde"
-              className="catalogoChina-input"
-              value={nuevoElemento.molde}
-              onChange={(e) =>
-                setNuevoElemento({ ...nuevoElemento, molde: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Imagen"
-              className="catalogoChina-input"
-              value={nuevoElemento.imagen}
-              onChange={(e) =>
-                setNuevoElemento({ ...nuevoElemento, imagen: e.target.value })
-              }
-            />
-          </section>
-          <button className="catalogoChina-button-add" onClick={agregarElemento}>Agregar</button>
-
-        </section>
-
+        <CatalogoChinaForm />
         <hr />
-        <section className="contenedor-input-search">
-
-
-          Buscar por IQMS:
-          <input
-            type="number"
-            placeholder="Buscar por IQMS"
-            className="catalogoChina-input"
-            value={busquedaIQMS}
-            onChange={(e) => setBusquedaIQMS(parseInt(e.target.value))}
-            onKeyDown={buscarPorIQMS} // Llama a la función buscarPorIQMS cuando se presiona una tecla
-          />
-          Buscar por Molde:
-          <input
-            type="text"
-            placeholder="Buscar por Molde"
-            className="catalogoChina-input"
-            value={busquedaMolde}
-            onChange={(e) => setBusquedaMolde(e.target.value)}
-            onKeyDown={buscarPorMolde} // Llama a la función buscarPorIQMS cuando se presiona una tecla
-          />
-        </section>
-        <hr />
+        <h2>Elementos del Catalogo</h2>
         <section className="contenedor-table-catalogo">
           <table>
             <thead>
               <tr>
-                <th className="table-header">IQMS</th>
-                <th className="table-header">IQMS2</th>
+                <th className="table-header">IQMS_AKA</th>
+                <th className="table-header">IQMS_DG</th>
                 <th className="table-header">MOLDE</th>
                 <th className="table-header">URL</th>
                 <th className="table-header">IMAGEN</th>
@@ -194,18 +126,18 @@ export const CatalogoChina = () => {
 
                 return (
                   <tr key={index}>
-                    <td className="table-element">{elemento.iqms}</td>
-                    <td className="table-element">{elemento.familia}</td>
+                    <td className="table-element">{elemento.iqms_aka}</td>
+                    <td className="table-element">{elemento.iqms_dg}</td>
                     <td className="table-element">{elemento.molde}</td>
-                    <td className="table-element">{elemento.imagen}</td>
+                    <td className="table-element"><a href={elemento.imagen}>{elemento.imagen}</a></td>
                     <td className="table-element">
-                      <img src={elemento.imagen} alt="image element" width={200} />
+                      <a href="https://ibb.co/s3Jy9hg"><img src={elemento.imagen} /></a>
                     </td>
                     {/*                     <td>
                       <BarCode additionalProp={elemento.iqms} />
                     </td> */}
                     <td>
-                      <button className="table-button-delete" onClick={() => eliminarElemento(elemento.iqms)}>
+                      <button className="table-button-delete" onClick={() => eliminarElemento(elemento.iqms_aka)}>
                         Eliminar
                       </button>
                     </td>
@@ -218,29 +150,7 @@ export const CatalogoChina = () => {
             </tbody>
 
           </table>
-          {resultadoBusqueda && (
-            <div>
-              <h2 className="catalogoChina-title">Resultado de la Búsqueda</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th className="table-header">IQMS</th>
-                    <th className="table-header">FAMILIA</th>
-                    <th className="table-header">MOLDE</th>
-                    <th className="table-header">FOTO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="table-element">{resultadoBusqueda.iqms}</td>
-                    <td className="table-element">{resultadoBusqueda.familia}</td>
-                    <td className="table-element">{resultadoBusqueda.molde}</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          )}
+
         </section>
 
       </Container>

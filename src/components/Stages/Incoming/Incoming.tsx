@@ -3,15 +3,20 @@ import BarcodeScanner from "../../BarCodeScanner"
 import FileUploadWrapper from "../../FileUploadWrapper"
 import Header from "../../Header/Header"
 import { QrCodeScanner } from "../../QrCodeScanner"
-import { Search } from "../../Search/search"
+import  Search from "../../Search/search"
 import Title from "../../Title/Title"
 import "./Incoming.css"
 
 
 export const Incoming = () => {
   const [scannedBarcode, setScannedBarcode] = useState("")
-  const [searchSerial, setSearchSerial] = useState("")
+  const [searchSerial, setSearchSerial] = useState(0)
 
+
+  function handleSearch(iqms:number) {
+    console.log('Child did:',iqms);
+    setSearchSerial(iqms)
+  }
 
   const handleScan = (barcode: string) => {
     // Aquí puedes manejar la respuesta del servidor
@@ -46,8 +51,7 @@ export const Incoming = () => {
       <main className="incoming">
         <section>
           <h3 className="step-title">1. Busqueda del producto </h3>
-          <Search />
-          <p> Serial de prueba : 7702354930998</p>
+          <Search onSearch={handleSearch} iqms={0} familia={""} molde={""} imagen={""} />
         </section>
         <section>
           <h3 className="step-title">2. Escanear con el codigo de barras</h3>
@@ -66,7 +70,7 @@ export const Incoming = () => {
 
         </section>
 
-<section>
+        <section>
           <h3 className="step-title">4. Copiar los seriales </h3>
 
           <p><strong>Serial encontrado en la busqueda : </strong>
@@ -76,7 +80,7 @@ export const Incoming = () => {
               "Aún no ha buscado un producto."
             }
           </p>
-          
+
           <p>
             <strong>Serial encontrado con el scanner de código de barras : </strong>
             {scannedBarcode ?

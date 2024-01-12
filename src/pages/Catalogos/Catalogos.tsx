@@ -1,12 +1,8 @@
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import { QrCodeScanner } from "../../components/QrCodeScanner";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import "./Catalogos.css";
-import { Search } from "../../components/Search/search";
-import BarcodeScanner from "../../components/BarCodeScanner";
-import BanderaChina from "../../assets/img/bandera_de_china.webp"
 
 
 export const Catalogos = () => {
@@ -15,14 +11,17 @@ export const Catalogos = () => {
 
   const handleClickChina = () =>{
     navigate('/incoming')
+    localStorage.setItem("catalogo","China");
   }
 
   const handleClickQueretaro = () =>{
     navigate('/catalogoQueretaro')
+    localStorage.setItem("catalogo","Queretaro");
   }
 
   const handleClickUsa = () =>{
     navigate('/catalogoUsa')
+    localStorage.setItem("catalogo","USA");
   }
 
   return (
