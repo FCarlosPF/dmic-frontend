@@ -1,5 +1,5 @@
 import Header from "../../components/Header/Header";
-import EmbarqueStage from "../../components/Stages/Embarque/EmbarqueStage";
+import { Stage } from "../../components/Stages/Stage";
 import Title from "../../components/Title/Title";
 
 export default function Embarque() {
@@ -7,7 +7,7 @@ export default function Embarque() {
     <>
         <Header />
         <Title  text="Embarque" />
-        <EmbarqueStage />
+        <Stage stage="Embarque" />
     </>
   )
 }

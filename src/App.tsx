@@ -22,7 +22,7 @@ function App() {
           <Route path="/cuenta" element={<Account />} />
           <Route path="/catalogoqueretaro" element={<CatalogoQueretaro />} />
           <Route path="/catalogousa" element={<CatalogoUSA />} />
-          <Route path="/etiquetaincoming" element={<Impresion />} />
+          <Route path="/etiqueta/:stage" element={<Impresion />} />
           <Route path="/incoming" element={<Incoming />} />
           <Route path="/empaquetado" element={<Empaquetado />} />
           <Route path="/embarque" element={<Embarque />} />

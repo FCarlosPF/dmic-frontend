@@ -1,5 +1,5 @@
 import Header from "../../components/Header/Header"
-import { IncomingStage } from "../../components/Stages/Incoming/IncomingStage"
+import { Stage } from "../../components/Stages/Stage"
 import Title from "../../components/Title/Title"
 
 function Incoming() {
@@ -7,7 +7,7 @@ function Incoming() {
         <>
             <Header />
             <Title text="INCOMING" />
-            <IncomingStage />
+            <Stage stage="Incoming" />
         </>
     )
 }

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import FileUpload from './FileUpload'; // Asegúrate de proporcionar la ruta correcta al componente FileUpload
-import Swal from 'sweetalert2';
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import FileUpload from './FileUpload';
 
 
-const FileUploadWrapper: React.FC = () => {
+const FileUploadWrapper = (props: { stage: any; }) => {
   const navigate = useNavigate();
 
   const [responseValues, setResponseValues] = useState<string[]>([]);
@@ -18,7 +18,9 @@ const FileUploadWrapper: React.FC = () => {
       return (
         <>
           <p>Los valores coinciden: {responseValues[0]}</p>
-          <Link to='/etiquetaincoming'><button>Imprimir Etiqueta</button></Link>
+          <Link to={`/etiqueta/${props.stage}`}>
+            <button className="print-button">Imprimir Etiqueta</button>
+          </Link>
         </>
       )
     } else
@@ -27,10 +29,7 @@ const FileUploadWrapper: React.FC = () => {
           title: "Validación erronea",
           text: "Los seriales no coinciden o no han ingresado los dos codigos",
           icon: "warning",
-          //showCancelButton: true,
           confirmButtonColor: "#3085d6",
-          //cancelButtonColor: "#d33",
-          //cancelButtonText: "Verificar",
           confirmButtonText: "Aceptar"
         }).then((result) => {
           if (result.isConfirmed) {

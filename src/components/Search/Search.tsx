@@ -8,7 +8,7 @@ interface CatalogoItemChina {
   iqms_aka: number;
   iqms_dg: number;
   molde: string;
-  imagen: string;
+  foto: any;
   onSearch?: (iqms: number) => void
 }
 
@@ -96,7 +96,20 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
                   <td className="table-element">{resultadoBusqueda.iqms_aka}</td>
                   <td className="table-element">{resultadoBusqueda.iqms_dg}</td>
                   <td className="table-element">{resultadoBusqueda.molde}</td>
-                  <td className="table-element">{resultadoBusqueda.imagen}</td>
+                  {resultadoBusqueda.foto &&
+                      typeof resultadoBusqueda.foto === "object" &&
+                      "type" in resultadoBusqueda.foto &&
+                      resultadoBusqueda.foto.type === "Buffer" &&
+                      "data" in resultadoBusqueda.foto ? (
+                        <img
+                          src={URL.createObjectURL(
+                            new Blob([new Uint8Array(resultadoBusqueda.foto.data)])
+                          )}
+                          alt={`Imagen ${resultadoBusqueda.iqms_aka}`}
+                        />
+                      ) : (
+                        "Imagen no válida"
+                      )}
                 </tr>
               </tbody>
             </table>
@@ -117,7 +130,7 @@ interface CatalogoItem_USA_QRO {
   familia: string;
   molde1: string;
   molde2: string;
-  foto: string;
+  foto: any;
   onSearch?: (iqms: number) => void
 }
 
@@ -209,7 +222,22 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
                   <td className="table-element">{resultadoBusqueda.familia}</td>
                   <td className="table-element">{resultadoBusqueda.molde1}</td>
                   <td className="table-element">{resultadoBusqueda.molde2}</td>
-                  <td className="table-element"><a href={resultadoBusqueda.foto}>{resultadoBusqueda.foto}</a></td>
+                  <td className="table-element">
+                      {resultadoBusqueda.foto &&
+                      typeof resultadoBusqueda.foto === "object" &&
+                      "type" in resultadoBusqueda.foto &&
+                      resultadoBusqueda.foto.type === "Buffer" &&
+                      "data" in resultadoBusqueda.foto ? (
+                        <img
+                          src={URL.createObjectURL(
+                            new Blob([new Uint8Array(resultadoBusqueda.foto.data)])
+                          )}
+                          alt={`Imagen ${resultadoBusqueda.iqms1}`}
+                        />
+                      ) : (
+                        "Imagen no válida"
+                      )}
+                    </td>
                 </tr>
               }
             </tbody>

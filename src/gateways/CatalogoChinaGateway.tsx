@@ -4,7 +4,7 @@ interface CatalogoItem {
   iqms_aka: number;
   iqms_dg: number;
   molde: string;
-  imagen: string;
+  foto: any;
 }
 
 class CatalogoChinaGateway {
@@ -46,10 +46,9 @@ class CatalogoChinaGateway {
   }
 
   // Agregar un nuevo elemento
-  async create(data: CatalogoItem): Promise<CatalogoItem> {
+  async create(data: FormData): Promise<void> {
     try {
-      const response: AxiosResponse<CatalogoItem> = await axios.post(this.baseURL, data);
-      return response.data;
+      await axios.post(this.baseURL, data);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
@@ -60,6 +59,7 @@ class CatalogoChinaGateway {
       throw error;
     }
   }
+  
   // Actualizar un elemento por su ID
   async update(iqms: number, data: CatalogoItem): Promise<CatalogoItem> {
     try {

@@ -9,7 +9,7 @@ interface CatalogoItem {
     familia: string;
     molde1: string;
     molde2: string;
-    foto: string;
+    foto: any;
 }
 
 export const Catalogo_USA_QRO_Form = () => {
@@ -24,16 +24,34 @@ export const Catalogo_USA_QRO_Form = () => {
         foto: "",
     });
     const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
+    
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
     const catalogoGateway = new Catalogo_USA_QRO_Gateway();
 
-
+    const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+          setSelectedFile(event.target.files[0]);
+        }
+      };
     const agregarElemento = (event: React.FormEvent) => {
         event.preventDefault();
+    const formData = new FormData();
+    formData.append("iqms1", nuevoElemento.iqms1.toString());
+    formData.append("iqms2", nuevoElemento.iqms2.toString());
+    formData.append("iqms3", nuevoElemento.iqms3.toString());
+    formData.append("familia", nuevoElemento.familia.toString());
+    formData.append("molde1", nuevoElemento.molde1);
+    formData.append("molde2", nuevoElemento.molde2);
+    formData.append("foto", "s");
+    if (selectedFile) {
+        formData.append("image", selectedFile);
+      }
+    console.log(formData);
     
         catalogoGateway
-          .create(nuevoElemento)
+          .create(formData)
           .then((data) => {
-            setCatalogo([...catalogo, data]);
             setNuevoElemento({
                 iqms1: 0,
                 iqms2: 0,
@@ -43,6 +61,7 @@ export const Catalogo_USA_QRO_Form = () => {
                 molde2: "",
                 foto: "",
             });
+            setSelectedFile(null);
           })
           .catch((error) =>
             console.error("Error al agregar nuevo elemento:", error)
@@ -120,7 +139,7 @@ export const Catalogo_USA_QRO_Form = () => {
                     <input
                         className="catalogo-input"
                         type="text"
-                        placeholder="molde1"
+                        placeholder="Molde 1"
                         value={nuevoElemento.molde1}
                         onChange={(e) =>
                             setNuevoElemento({
@@ -136,7 +155,7 @@ export const Catalogo_USA_QRO_Form = () => {
                     <input
                         className="catalogo-input"
                         type="text"
-                        placeholder="molde2"
+                        placeholder="Molde 2"
                         value={nuevoElemento.molde2}
                         onChange={(e) =>
                             setNuevoElemento({
@@ -150,17 +169,11 @@ export const Catalogo_USA_QRO_Form = () => {
                     FOTO
                     <input
                         className="catalogo-input"
-                        type="text"
-                        placeholder="imagen"
-                        value={nuevoElemento.foto}
-                        onChange={(e) =>
-                            setNuevoElemento({
-                                ...nuevoElemento,
-                                foto: e.target.value,
-                            })
-                        }
-                        name="imagen"
-                    />
+                        type="file"
+            placeholder="Imagen"
+            accept="image/jpg, image/jpeg"
+            onChange={onFileChange}
+          />
                 </label>
             </form>
             <button className="catalogo-button-add" onClick={agregarElemento}>Agregar</button>
