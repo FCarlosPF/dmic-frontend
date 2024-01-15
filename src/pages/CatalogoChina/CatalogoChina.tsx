@@ -10,9 +10,8 @@ interface CatalogoItem {
   iqms_aka: number;
   iqms_dg: number;
   molde: string;
-  imagen: string;
+  imagen: any;
 }
-
 
 export const CatalogoChina = () => {
   const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
@@ -33,7 +32,13 @@ export const CatalogoChina = () => {
   useEffect(() => {
     catalogoGateway
       .getAll()
-      .then((data) => setCatalogo(data))
+      .then((data) => {
+        setCatalogo(data);
+        //console.log("Tipo de dato de catalogo:", typeof data);
+        /* if (data.length > 0 && data[0].imagen) {
+          console.log("Tipo de dato de la primera imagen:", typeof data[0].imagen);
+        } */
+      })
       .catch((error) =>
         console.error("Error al obtener elementos del catálogo:", error)
       );
@@ -42,7 +47,7 @@ export const CatalogoChina = () => {
   const agregarElemento = (event: React.FormEvent) => {
     event.preventDefault();
 
-    catalogoGateway
+    /* catalogoGateway
       .create(nuevoElemento)
       .then((data) => {
         setCatalogo([...catalogo, data]);
@@ -55,7 +60,7 @@ export const CatalogoChina = () => {
       })
       .catch((error) =>
         console.error("Error al agregar nuevo elemento:", error)
-      );
+      ); */
   };
 
   const eliminarElemento = (iqms: number) => {
@@ -99,7 +104,6 @@ export const CatalogoChina = () => {
     }
   };
 
-
   return (
     <>
       <Header />
@@ -116,7 +120,6 @@ export const CatalogoChina = () => {
                 <th className="table-header">IQMS_AKA</th>
                 <th className="table-header">IQMS_DG</th>
                 <th className="table-header">MOLDE</th>
-                <th className="table-header">URL</th>
                 <th className="table-header">IMAGEN</th>
               </tr>
             </thead>
@@ -129,30 +132,39 @@ export const CatalogoChina = () => {
                     <td className="table-element">{elemento.iqms_aka}</td>
                     <td className="table-element">{elemento.iqms_dg}</td>
                     <td className="table-element">{elemento.molde}</td>
-                    <td className="table-element"><a href={elemento.imagen}>{elemento.imagen}</a></td>
                     <td className="table-element">
-                      <a href="https://ibb.co/s3Jy9hg"><img src={elemento.imagen} /></a>
+                      {elemento.imagen &&
+                      typeof elemento.imagen === "object" &&
+                      "type" in elemento.imagen &&
+                      elemento.imagen.type === "Buffer" &&
+                      "data" in elemento.imagen ? (
+                        <img
+                          src={URL.createObjectURL(
+                            new Blob([new Uint8Array(elemento.imagen.data)])
+                          )}
+                          alt={`Imagen ${index}`}
+                        />
+                      ) : (
+                        "Imagen no válida"
+                      )}
                     </td>
                     {/*                     <td>
                       <BarCode additionalProp={elemento.iqms} />
                     </td> */}
                     <td>
-                      <button className="table-button-delete" onClick={() => eliminarElemento(elemento.iqms_aka)}>
+                      <button
+                        className="table-button-delete"
+                        onClick={() => eliminarElemento(elemento.iqms_aka)}
+                      >
                         Eliminar
                       </button>
                     </td>
-
                   </tr>
-
                 );
               })}
-
             </tbody>
-
           </table>
-
         </section>
-
       </Container>
     </>
   );
