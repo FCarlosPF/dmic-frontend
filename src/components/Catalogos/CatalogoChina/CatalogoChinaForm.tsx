@@ -27,7 +27,6 @@ export const CatalogoChinaForm = () => {
 
   const agregarElemento = (event: React.FormEvent) => {
     event.preventDefault();
-    event.preventDefault();
     const formData = new FormData();
     formData.append("iqms_aka", nuevoElemento.iqms_aka.toString());
     formData.append("iqms_dg", nuevoElemento.iqms_dg.toString());

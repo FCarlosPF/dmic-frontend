@@ -7,7 +7,7 @@ interface CatalogoItem {
   familia: string;
   molde1: string;
   molde2: string;
-  foto: string;
+  foto: any;
 }
 
 class Catalogo_USA_QRO_Gateway{
@@ -18,7 +18,7 @@ class Catalogo_USA_QRO_Gateway{
   }
 
    // Agregar un nuevo elemento
-   async create(data: CatalogoItem): Promise<CatalogoItem> {
+   async create(data: FormData): Promise<CatalogoItem> {
     try {
       const response: AxiosResponse<CatalogoItem> = await axios.post(this.baseURL, data);
       return response.data;

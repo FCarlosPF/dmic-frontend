@@ -47,6 +47,35 @@ th{
     color: white;
     text-align: center;
 }
+th {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #030467;
+    color: aliceblue;
+  }
+  
+  td {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    padding: 8px 15px;
+  }
+  
+  
+  .td img {
+    max-width: 100%;
+    height: auto;
+  }
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }  
+ 
+  tr:nth-child(odd) {
+    background-color: white;
+  }
 
 @media screen and (min-width: 700px) {
 
