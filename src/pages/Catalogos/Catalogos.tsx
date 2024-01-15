@@ -15,12 +15,12 @@ export const Catalogos = () => {
   }
 
   const handleClickQueretaro = () =>{
-    navigate('/catalogoQueretaro')
+    navigate('/embarque')
     localStorage.setItem("catalogo","Queretaro");
   }
 
   const handleClickUsa = () =>{
-    navigate('/catalogoUsa')
+    navigate('/empaquetado')
     localStorage.setItem("catalogo","USA");
   }
 

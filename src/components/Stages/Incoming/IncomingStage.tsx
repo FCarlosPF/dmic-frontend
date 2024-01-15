@@ -1,20 +1,20 @@
 import { useState } from "react"
 import BarcodeScanner from "../../BarCodeScanner"
 import FileUploadWrapper from "../../FileUploadWrapper"
-import Header from "../../Header/Header"
-import { QrCodeScanner } from "../../QrCodeScanner"
-import  Search from "../../Search/search"
-import Title from "../../Title/Title"
+import { Search__USA_QRO, SearchChina } from "../../Search/search"
 import "./Incoming.css"
 
 
-export const Incoming = () => {
+export const IncomingStage = () => {
+
+  let catalogo = localStorage.getItem("catalogo");
+
   const [scannedBarcode, setScannedBarcode] = useState("")
   const [searchSerial, setSearchSerial] = useState(0)
 
 
-  function handleSearch(iqms:number) {
-    console.log('Child did:',iqms);
+  function handleSearch(iqms: number) {
+    console.log('iqms:', iqms);
     setSearchSerial(iqms)
   }
 
@@ -46,12 +46,31 @@ export const Incoming = () => {
 
   return (
     <div>
-      <Header />
-      <Title text="INCOMING" />
       <main className="incoming">
         <section>
           <h3 className="step-title">1. Busqueda del producto </h3>
-          <Search onSearch={handleSearch} iqms={0} familia={""} molde={""} imagen={""} />
+          {
+            catalogo == "China" ?
+              <SearchChina
+                onSearch={handleSearch}
+                iqms_aka={0}
+                iqms_dg={0}
+                molde={""}
+                imagen={""}
+              />
+              :
+              <Search__USA_QRO
+                onSearch={handleSearch}
+                iqms1={0}
+                iqms2={0}
+                iqms3={0}
+                familia={""}
+                molde1={""}
+                molde2={""}
+                foto={""}
+              />
+
+          }
         </section>
         <section>
           <h3 className="step-title">2. Escanear con el codigo de barras</h3>

@@ -96,7 +96,6 @@ export const CatalogoChinaForm = () => {
                         }
                     />
                 </label>
-                
             </form>
             <button className="catalogo-button-add" onClick={agregarElemento}>Agregar</button>
 

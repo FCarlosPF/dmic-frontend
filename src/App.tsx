@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login } from "./pages/Login/Login";
-import { Catalogos } from "./pages/Catalogos/Catalogos";
-import { CatalogoChina } from "./pages/CatalogoChina/CatalogoChina";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Account } from "./pages/Account/Account";
+import { CatalogoChina } from "./pages/CatalogoChina/CatalogoChina";
 import { CatalogoQueretaro } from "./pages/CatalogoQueretaro/CatalogoQueretaro";
 import { CatalogoUSA } from "./pages/CatalogoUSA/CatalogoUSA";
-import  Impresion  from "./pages/Impresion/Impresion";
-import { Incoming } from "./components/Stages/Incoming/Incoming";
-import 'bootstrap'
+import { Catalogos } from "./pages/Catalogos/Catalogos";
+import Impresion from "./pages/Impresion/Impresion";
+import Incoming from "./pages/Incoming/Incoming";
+import { Login } from "./pages/Login/Login";
+import Empaquetado from "./pages/Empaquetado/Empaquetado";
+import Embarque from "./pages/Embarque/Embarque";
+
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/catalogousa" element={<CatalogoUSA />} />
           <Route path="/etiquetaincoming" element={<Impresion />} />
           <Route path="/incoming" element={<Incoming />} />
+          <Route path="/empaquetado" element={<Empaquetado />} />
+          <Route path="/embarque" element={<Embarque />} />
         </Routes>
       </BrowserRouter>
     </>
