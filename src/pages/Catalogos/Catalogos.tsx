@@ -10,17 +10,17 @@ export const Catalogos = () => {
   const navigate = useNavigate();
 
   const handleClickChina = () =>{
-    navigate('/incoming')
+    navigate('/chinasteps')
     localStorage.setItem("catalogo","China");
   }
 
   const handleClickQueretaro = () =>{
-    navigate('/empaquetado')
+    navigate('/queretarosteps')
     localStorage.setItem("catalogo","Queretaro");
   }
 
   const handleClickUsa = () =>{
-    navigate('/incoming')
+    navigate('/usasteps')
     localStorage.setItem("catalogo","USA");
   }
 

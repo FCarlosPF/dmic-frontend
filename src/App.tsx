@@ -9,6 +9,9 @@ import Incoming from "./pages/Incoming/Incoming";
 import { Login } from "./pages/Login/Login";
 import Empaquetado from "./pages/Empaquetado/Empaquetado";
 import Embarque from "./pages/Embarque/Embarque";
+import { ChinaSteps } from "./pages/ChinaSteps/ChinaSteps";
+import { QueretaroSteps } from "./pages/QueretaroSteps/QueretaroSteps";
+import { USASteps } from "./pages/USASteps/USASteps";
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
           <Route path="/incoming" element={<Incoming />} />
           <Route path="/empaquetado" element={<Empaquetado />} />
           <Route path="/embarque" element={<Embarque />} />
+          <Route path="/chinasteps" element={<ChinaSteps />} />
+          <Route path="/queretarosteps" element={<QueretaroSteps />} />
+          <Route path="/usasteps" element={<USASteps />} />
         </Routes>
       </BrowserRouter>
     </>
