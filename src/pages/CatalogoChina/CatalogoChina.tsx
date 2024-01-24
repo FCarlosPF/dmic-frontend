@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { CatalogoChinaForm } from "../../components/Catalogos/CatalogoChina/CatalogoChinaForm";
 import Header from "../../components/Header/Header";
@@ -16,17 +16,17 @@ interface CatalogoItem {
 export const CatalogoChina = () => {
   const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
   const catalogoGateway = new CatalogoChinaGateway();
-  const [nuevoElemento, setNuevoElemento] = useState<CatalogoItem>({
+  const [] = useState<CatalogoItem>({
     iqms_aka: 0,
     iqms_dg: 0,
     molde: "",
     imagen: "",
   });
-  const [busquedaIQMS, setBusquedaIQMS] = useState<number>(0);
-  const [busquedaMolde, setBusquedaMolde] = useState<string>("");
-  const [scannedBarcode, setScannedBarcode] = useState<string | null>(null);
+  const [] = useState<number>(0);
+  const [] = useState<string>("");
+  const [] = useState<string | null>(null);
 
-  const [resultadoBusqueda, setResultadoBusqueda] =
+  const [] =
     useState<CatalogoItem | null>(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const CatalogoChina = () => {
       );
   }, []);
 
-  const agregarElemento = (event: React.FormEvent) => {
+  /*const agregarElemento = (event: React.FormEvent) => {
     event.preventDefault();
 
     /* catalogoGateway
@@ -60,8 +60,8 @@ export const CatalogoChina = () => {
       })
       .catch((error) =>
         console.error("Error al agregar nuevo elemento:", error)
-      ); */
-  };
+      ); 
+  };*/
 
   const eliminarElemento = (iqms: number) => {
     // Eliminar un elemento del catálogo por su ID
@@ -75,7 +75,7 @@ export const CatalogoChina = () => {
       })
       .catch((error) => console.error("Error al eliminar elemento:", error));
   };
-
+/*
   const buscarPorIQMS = async (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
@@ -89,7 +89,8 @@ export const CatalogoChina = () => {
       }
     }
   };
-
+*/
+/*
   const buscarPorMolde = async (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
@@ -102,7 +103,7 @@ export const CatalogoChina = () => {
         console.error("Error al realizar la búsqueda por Molde:", error);
       }
     }
-  };
+  };*/
 
   return (
     <>

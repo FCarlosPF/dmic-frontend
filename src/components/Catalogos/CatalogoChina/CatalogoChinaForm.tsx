@@ -15,7 +15,7 @@ export const CatalogoChinaForm = () => {
     molde: "",
   });
 
-  const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
+  const [] = useState<CatalogoItem[]>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const catalogoGateway = new CatalogoChinaGateway();
 
@@ -40,7 +40,7 @@ export const CatalogoChinaForm = () => {
     catalogoGateway
       .create(formData)
 
-      .then((data) => {
+      .then(() => {
         setNuevoElemento({
           iqms_aka: 0,
           iqms_dg: 0,

@@ -23,7 +23,7 @@ export const Catalogo_USA_QRO_Form = () => {
         molde2: "",
         foto: "",
     });
-    const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
+    const [] = useState<CatalogoItem[]>([]);
     
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   
@@ -51,7 +51,7 @@ export const Catalogo_USA_QRO_Form = () => {
     
         catalogoGateway
           .create(formData)
-          .then((data) => {
+          .then(() => {
             setNuevoElemento({
                 iqms1: 0,
                 iqms2: 0,

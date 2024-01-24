@@ -6,7 +6,6 @@ import label2 from "../../assets/img/Etiqueta2.png";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import "./Impresion.css";
-import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 

@@ -8,9 +8,25 @@ header{
     background-blend-mode: multiply;
     background-size: contain;
 }
-
+.header-logos-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 4%;
+}
 header img{
     width: 20%;
+    margin: 0px 2%;
+}
+.header-logos-container::before {
+    content: '';
+    position: absolute;
+    width: 1px; /* Ajusta el ancho de la línea según tus preferencias */
+    height: 10%; /* La línea tendrá la misma altura que el contenedor */
+    background-color: white;
+    left: 50%; /* Coloca la línea en el centro del contenedor */
+    transform: translateX(-50%); /* Ajusta la posición para que la línea esté centrada */
 }
 
 header h3{

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CatalogoUSAGateway from "../../../gateways/Catalogo_USA_QRO_Gateway";
 import "../Catalogos.css";
 

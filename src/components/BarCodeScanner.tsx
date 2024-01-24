@@ -8,7 +8,7 @@ interface BarcodeScannerProps {
 
 const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
   const videoRef = useRef<HTMLDivElement|HTMLVideoElement | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
   
 
   useEffect(() => {

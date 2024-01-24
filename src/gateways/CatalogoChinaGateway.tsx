@@ -4,7 +4,7 @@ interface CatalogoItem {
   iqms_aka: number;
   iqms_dg: number;
   molde: string;
-  foto: any;
+  imagen: any;
 }
 
 class CatalogoChinaGateway {
