@@ -46,14 +46,64 @@ class Catalogo_USA_QRO_Gateway{
   }
 
   // Obtener un elemento por su ID
-  async getById(iqms: number): Promise<CatalogoItem> {
+  async getById1(iqms1: number): Promise<CatalogoItem> {
     try {
-      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms}`);
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms1}`);
       return response.data;
     } catch (error) {
       throw error;
     }
   }
+  async getById2(iqms2: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms2}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async getById3(iqms3: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms3}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /*async getById_1_2(iqms1: number, iqms2: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms-two/${iqms1}/${iqms2}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async getById_1_3(iqms1: number, iqms3: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms-two/${iqms1}/${iqms3}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async getById_2_3(iqms2: number, iqms3: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms-two/${iqms2}/${iqms3}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+ // Obtener un elemento por sus IDs
+ async getByIds(iqms1: number, iqms2: number, iqms3: number): Promise<CatalogoItem> {
+  try {
+    const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms-search/${iqms1}/${iqms2}/${iqms3}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}*/
 
   async getByMolde(molde: string): Promise<CatalogoItem> {
     try {

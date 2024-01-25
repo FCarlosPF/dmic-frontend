@@ -27,9 +27,26 @@ class CatalogoChinaGateway {
   }
 
   // Obtener un elemento por su ID
-  async getById(iqms: number): Promise<CatalogoItem> {
+  async getById_aka(iqms_aka: number): Promise<CatalogoItem> {
     try {
-      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms}`);
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms_aka}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async getById_dg(iqms_dg: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms_dg}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+   // Obtener un elemento por sus IDs
+   async getByIds(iqmsAka: number, iqmsDg: number): Promise<CatalogoItem> {
+    try {
+      const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms-search/${iqmsAka}/${iqmsDg}`);
       return response.data;
     } catch (error) {
       throw error;
