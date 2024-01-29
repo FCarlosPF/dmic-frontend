@@ -1,0 +1,17 @@
+.upload-button,
+.clear-button {
+  border-radius: 0.5rem;
+  background-color: var(--naval-blue-color);
+  color: white;
+  font-weight: 450;
+  font-family: 'Roboto', sans-serif;
+  border-style: none;
+  font-size: 0.9rem;
+  padding: 8px 5px;
+  margin-right: 5px; 
+}
+
+.file-input {
+  margin-right: 5px;
+  min-height: 35px;
+}

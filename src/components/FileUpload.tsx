@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import "./FileUpload.css"
 
 interface FileUploadProps {
   onUpload: (responseValue: string) => void;
-  identifier: string;
   scannedCode: string;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onUpload, identifier, scannedCode }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ onUpload, scannedCode }) => {
   const stage = window.location.pathname;
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -29,8 +29,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, identifier, scannedCo
     setTextBarInput(event.target.value);
   };
 
+
   const onUploads = async () => {
     try {
+      
       if (selectedFile) {
         const formData = new FormData();
         formData.append('image', selectedFile);
@@ -57,25 +59,47 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, identifier, scannedCo
       console.error('Error al subir el archivo:', error);
     }
   };
+  const onUploadsLimpiar = async () => {
+    try {
+       if (selectedFile) {
+        
+        setResponseValue("");
+        onUpload("");
+        setTextInput("");
+      } else if (textInput) {
+        // Handle text input verification
+        setResponseValue("");
+        onUpload("");
+        setTextInput("");
+        console.log('borado serial extraído (desde texto)');
+      } else if (code) {
+        setResponseValue("");
+        onUpload("");
+        setTextBarInput("");
+        console.log('borrado Codigo de barras escanneado:');
+      } else {
+        console.error('No se ha seleccionado ningún archivo ni se ha ingresado texto.');
+      }
+    } catch (error) {
+      console.error('Error al subir el archivo:', error);
+    }
+  };
 
   function renderInputFile() {
     return(
       <input type="file" onChange={onFileChange} />
     )
   }
-  
-  useEffect(() => {
-    if (!code) {
-      setTextBarInput(scannedCode);
-      console.log("codigoFile-> " + code);
-    }
-  }, [code, scannedCode]);
 
   useEffect(() => {
-    if (identifier) {
-      console.log("identifier-> " + identifier);
-    }
-  }, [identifier]);
+    if (!code) {
+      
+          setTextBarInput(scannedCode);
+      }
+      console.log("codigoFile-> " + code);
+    
+  }, [code, scannedCode]);
+
 
   return (
     <div>
@@ -86,8 +110,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, identifier, scannedCo
       <>
       <br></br>
       <br></br>
-        <input type="text" value={textInput} onChange={onTextChange} />
-        <button onClick={onUploads}>Subir Archivo</button>
+      <input className="file-input" type="file" onChange={onFileChange} />
+<input type="text" value={textInput} onChange={onTextChange} />
+<button className="upload-button" onClick={onUploads}>Subir Archivo</button>
+<button className="clear-button" onClick={onUploadsLimpiar}>Limpiar</button>
+        {/* {errorState && <><button onClick={handleCleanFile}>Limpiar</button></>} */}
         {responseValue && <p>Valor retornado: {responseValue}</p>}
         </>
       </>
@@ -96,8 +123,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, identifier, scannedCo
     {(stage === "/incoming" || stage === "/empaquetado") && (
       <>
         {/* <button onClick={() => setTextBarInput(code)}>Establecer código escaneado</button>    */}
-        <input type="text" value={code} onChange={onTextBarChange} />
-        <button onClick={onUploads}>Verificar Texto</button>
+        <input className="file-input" type="text" value={code} onChange={onTextBarChange} />
+<button className="upload-button" onClick={onUploads}>Verificar Texto</button>
+<button className="clear-button" onClick={onUploadsLimpiar}>Limpiar</button>
+        {/* {errorState && <><button onClick={handleCleanText}>Limpiar</button></>} */}
         {responseValue && <p>Valor retornado: {responseValue}</p>}
       </>
     )}
