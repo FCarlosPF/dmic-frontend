@@ -32,7 +32,7 @@ export const USASteps = () => {
         Incoming
       </Button>
       <Button variant="dark" className="btn-catalogo" onClick={handleClickEmpaquetado}>
-        Empaquetado
+        Empaque
       </Button>
       <Button variant="dark" className="btn-catalogo" onClick={handleClickEmbarque}>
         Embarque

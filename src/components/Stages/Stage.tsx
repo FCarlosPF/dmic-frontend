@@ -29,11 +29,7 @@ export const Stage = (props: { stage: string }) => {
 
 
 
-<<<<<<< Updated upstream
- useEffect(() => {
-=======
   useEffect(() => {
->>>>>>> Stashed changes
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: false })
       .then((stream) => {
@@ -88,16 +84,9 @@ export const Stage = (props: { stage: string }) => {
         <section>
           <h3 className="step-title">2. Escanear con el codigo de barras</h3>
         
-<<<<<<< Updated upstream
        { hasPermissions &&
             <BarcodeScanner onScan={handleScan} />
        }
-=======
-        { hasPermissions &&
-            <BarcodeScanner onScan={handleScan} />
-        }
-          
->>>>>>> Stashed changes
           <p>
             Producto encontrado con el código de barras:
             {scannedBarcode}

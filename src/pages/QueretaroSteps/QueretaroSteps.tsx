@@ -24,7 +24,7 @@ export const QueretaroSteps = () => {
     <Title text="Catalogo Queretaro" />
     <section className="tipo-catalogo">      
       <Button variant="dark" className="btn-catalogo" onClick={handleClickEmpaquetado}>
-        Empaquetado
+        Empaque
       </Button>
       <Button variant="dark" className="btn-catalogo" onClick={handleClickEmbarque}>
         Embarque

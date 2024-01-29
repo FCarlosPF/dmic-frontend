@@ -13,11 +13,8 @@ interface CatalogoItem {
 class Catalogo_USA_QRO_Gateway {
   private baseURL: string;
 
-<<<<<<< Updated upstream
-  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/producto-queretaro") {
-=======
+
   constructor(baseURL: string = "http:192.168.0.8:3000/producto-queretaro") {
->>>>>>> Stashed changes
     this.baseURL = baseURL;
   }
 

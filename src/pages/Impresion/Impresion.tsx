@@ -48,7 +48,7 @@ const Impresion: React.FC = () => {
       text: "Proceso completado con éxito",
       icon: "success"
     });
-    navigate('/catalogos');
+    
   };
 
 

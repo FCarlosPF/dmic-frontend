@@ -10,11 +10,9 @@ interface CatalogoItem {
 class CatalogoChinaGateway {
   private baseURL: string;
 
-<<<<<<< Updated upstream
-  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/catalogoChina") {
-=======
+
+  
   constructor(baseURL: string = "http://192.168.0.8:3000/catalogoChina") {
->>>>>>> Stashed changes
     this.baseURL = baseURL;
   }
 
