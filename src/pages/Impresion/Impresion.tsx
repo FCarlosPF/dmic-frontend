@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import label1 from "../../assets/img/Etiqueta 1_page-0001.jpg";
 import label3 from "../../assets/img/Etiqueta 3_page-0001.jpg";
@@ -10,7 +10,7 @@ import "./Impresion.css";
 
 
 const Impresion: React.FC = () => {
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
   const { stage } = useParams();
 
   const catalogo = localStorage.getItem("catalogo");

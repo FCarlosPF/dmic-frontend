@@ -2,6 +2,7 @@ import { useState } from "react";
 import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
 import Catalogo_USA_QRO_Gateway from "../../gateways/Catalogo_USA_QRO_Gateway";
 import "./Search.css";
+import Swal from 'sweetalert2';
 
 interface CatalogoItemChina {
   iqms_aka: number;
@@ -32,6 +33,13 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
     }
+    Swal.fire({
+      title: "Producto no encontrado",
+      text: "No se encontró ningún producto con el IQMS proporcionado.",
+      icon: "info",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Aceptar"
+    });
   };
 
   const buscarPorMolde = async () => {
@@ -43,6 +51,14 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
     } catch (error) {
       console.error("Error al realizar la búsqueda por Molde:", error);
     }
+    Swal.fire({
+      title: "Producto no encontrado",
+      text: "No se encontró ningún producto con el molde proporcionado.",
+      icon: "info",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Aceptar"
+    });
+    
   };
 
   return (
@@ -172,6 +188,13 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
     }
+    Swal.fire({
+      title: "Producto no encontrado",
+      text: "No se encontró ningún producto con el IQMS proporcionado.",
+      icon: "info",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Aceptar"
+    });
   };
   
   const buscarPorMolde = async () => {
@@ -183,6 +206,14 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
     } catch (error) {
       console.error("Error al realizar la búsqueda por Molde:", error);
     }
+
+    Swal.fire({
+      title: "Producto no encontrado",
+      text: "No se encontró ningún producto con el IQMS proporcionado.",
+      icon: "info",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Aceptar"
+    });
   };
 
   return (

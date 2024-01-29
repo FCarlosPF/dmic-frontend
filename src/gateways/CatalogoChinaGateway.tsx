@@ -12,7 +12,7 @@ class CatalogoChinaGateway {
 
 
   
-  constructor(baseURL: string = "http://192.168.0.8:3000/catalogoChina") {
+  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/catalogoChina") {
     this.baseURL = baseURL;
   }
 

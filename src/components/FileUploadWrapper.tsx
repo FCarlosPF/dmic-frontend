@@ -1,17 +1,35 @@
-import { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import FileUpload from './FileUpload';
 
 
-const FileUploadWrapper = (props: { stage: any; }) => {
-  const navigate = useNavigate();
+const FileUploadWrapper = (props: { stage: any; scannedBarcode1: string ; scannedBarcode2: string }) => {
+  //const navigate = useNavigate();
 
   const [responseValues, setResponseValues] = useState<string[]>([]);
+  const [scannedCode1, setScannedCode1] = useState<string>("");
+  const [scannedCode2, setScannedCode2] = useState<string>("");
 
   const onFileUpload = (responseValue: string) => {
     setResponseValues(prevValues => [...prevValues, responseValue]);
   };
+  useEffect(() => {
+    if (!scannedCode1) {
+      setScannedCode1(props.scannedBarcode1);
+    } else {
+      console.log("scanner1-> " + scannedCode1);
+    }
+  }, [scannedCode1, props.scannedBarcode1]);
+  
+  useEffect(() => {
+    if (!scannedCode2) {
+      setScannedCode2(props.scannedBarcode2);
+    } else {
+      console.log("scanner2-> " + scannedCode2);
+    }
+  }, [scannedCode2, props.scannedBarcode2]);
+  
 
   const renderVerificationResult = () => {
     if (responseValues.length === 2 && responseValues[0] === responseValues[1]) {
@@ -31,18 +49,23 @@ const FileUploadWrapper = (props: { stage: any; }) => {
           icon: "warning",
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Aceptar"
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate('/catalogos')
-          }
-        });;
+        });
       }
   };
 
   return (
     <div>
-      <FileUpload onUpload={onFileUpload} />
-      <FileUpload onUpload={onFileUpload} />
+      <FileUpload
+  onUpload={(responseValue) => onFileUpload(responseValue)}
+  identifier="1"
+  scannedCode={scannedCode1}
+/>
+<hr />
+<FileUpload
+  onUpload={(responseValue) => onFileUpload(responseValue)}
+  identifier="2"
+  scannedCode={scannedCode2}
+/>
       {renderVerificationResult()}
     </div>
   );

@@ -2,11 +2,10 @@
 import Quagga from "quagga";
 import React, { useEffect, useRef, useState } from 'react';
 
-interface BarcodeScannerProps {
+interface BarcodeScannerProps2 {
   onScan: (barcode: string ) => void;
 }
-
-const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
+const BarcodeScanner2: React.FC<BarcodeScannerProps2> = ({ onScan }) => {
   const videoRef = useRef<HTMLDivElement|HTMLVideoElement | null>(null);
   const [, setError] = useState<string | null>(null);
   
@@ -49,8 +48,8 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
     };
   }, [onScan]);
 
-  return <div id="barcode-scanner" ref={(element) => (videoRef.current = element)} />; // Agregado ref para videoRef
+  return <div id="barcode-scanner2" ref={(element) => (videoRef.current = element)} />; // Agregado ref para videoRef
 
 };
 
-export default BarcodeScanner;
+export default BarcodeScanner2;
