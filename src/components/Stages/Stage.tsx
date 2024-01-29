@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import BarcodeScanner from "../BarCodeScanner";
+import BarcodeScanner2 from "../BarCodeScanner2";
 import FileUploadWrapper from "../FileUploadWrapper";
 import { Search__USA_QRO, SearchChina } from "../Search/search";
 import "./Stage.css";
 
 export const Stage = (props: { stage: string }) => {
+  const stage = window.location.pathname;
   let catalogo = localStorage.getItem("catalogo");
 
-  const [scannedBarcode, setScannedBarcode] = useState("");
+  const [scannedBarcode1, setScannedBarcode1] = useState("");
+  const [scannedBarcode2, setScannedBarcode2] = useState("");
+  const [activateSecondScanner, setActivateSecondScanner] = useState(false);
+  const [activateFirstScanner, setActivateFirstScanner] = useState(true);
+
   const [, setSearchSerial] = useState(0);
 
   function handleSearch(iqms: number) {
@@ -16,32 +22,36 @@ export const Stage = (props: { stage: string }) => {
   }
 
   const handleScan = (barcode: string) => {
-    // Aquí puedes manejar la respuesta del servidor
-    // Por ejemplo, puedes hacer una solicitud al backend para obtener más información sobre el producto
+    if (!scannedBarcode1) {
+      setScannedBarcode1(barcode);
+      console.log("codigoStage1" + barcode);
+      setTimeout(() => {
+        setActivateSecondScanner(true);
+        setActivateFirstScanner(false);
+      }, 2000);
+    }
+    /* console.log("second?", activateSecondScanner);
+    console.log("first?", activateSecondScanner); */
+  };
 
-    // Supongamos que tu API devuelve un objeto con la información del producto
-
-    console.log(barcode);
-    setScannedBarcode(barcode);
-
-    /*fetch(`http://localhost:3000/catalogoChina/iqms/${barcode}`)
-      .then((response) => response.json())
-      .then((product) => {
-        console.log('Producto encontrado:', product);
-        setScannedBarcode(barcode);
-        // Realiza las acciones necesarias con la información del producto
-      })
-      .catch((error) => {
-        console.error('Error al obtener el producto:', error);
-        setScannedBarcode("");
-      });*/
+  const handleScan2 = (barcode: string) => {
+    if (scannedBarcode1) {
+      setScannedBarcode2(barcode);
+      console.log("codigoStage2" + barcode);
+      setActivateSecondScanner(false);
+      setActivateFirstScanner(true);
+    }
+   /*  console.log("second->", activateSecondScanner);
+    console.log("first->", activateSecondScanner); */
   };
 
   return (
     <div>
       <main className="incoming">
         <section>
-          <h3 className="step-title">1. Busqueda del producto </h3>
+        {stage != "/embarque" && (
+          <>
+          <h3 className="step-title">Búsqueda del producto</h3>
           {catalogo == "China" ? (
             <SearchChina
               onSearch={handleSearch}
@@ -62,36 +72,37 @@ export const Stage = (props: { stage: string }) => {
               foto={""}
             />
           )}
+          </>
+)}
         </section>
         <section>
-          <h3 className="step-title">2. Escanear con el codigo de barras</h3>
-
-          <BarcodeScanner onScan={handleScan} />
-          {scannedBarcode ? (
+          <h3 className="step-title">Escanear con el codigo de barras</h3>
+          {activateFirstScanner && <BarcodeScanner onScan={handleScan} />}
+          {scannedBarcode1 ? (
             <p>
-              Producto encontrado con el código de barras:
-              {scannedBarcode}
+              Producto encontrado con el código de barras: {scannedBarcode1}
             </p>
           ) : (
             <p>Aún no ha escaneado un código de barras.</p>
           )}
+          {activateSecondScanner && <BarcodeScanner2 onScan={handleScan2} />}
+          {/* {scannedBarcode2 ? (
+            <p>
+              Producto encontrado con el segundo código de barras:{" "}
+              {scannedBarcode2}
+            </p>
+          ) : (
+            <p>Aún no ha escaneado el segundo código de barras.</p>
+          )} */}
         </section>
 
         <section>
-          <h3 className="step-title">4. Copiar los seriales </h3>
-
-          <p>
-            <strong>
-              Serial encontrado con el scanner de código de barras :{" "}
-            </strong>
-            {scannedBarcode
-              ? scannedBarcode
-              : "Aún no ha escaneado un código de barras."}
-          </p>
-        </section>
-        <section>
-          <h3 className="step-title">5. Comparar </h3>
-          <FileUploadWrapper stage={props.stage} />
+          <h3 className="step-title">Comparar </h3>
+          <FileUploadWrapper
+            stage={props.stage}
+            scannedBarcode1={scannedBarcode1}
+            scannedBarcode2={scannedBarcode2}
+          />
         </section>
       </main>
     </div>
