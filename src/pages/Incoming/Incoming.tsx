@@ -12,6 +12,4 @@ function Incoming() {
     )
 }
 
-Incoming.propTypes = {}
-
 export default Incoming

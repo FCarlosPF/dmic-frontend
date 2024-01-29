@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../Catalogos.css";
 import CatalogoChinaGateway from "../../../gateways/CatalogoChinaGateway";
+import "../Catalogos.css";
 
 interface CatalogoItem {
   iqms_aka: number;

@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface CatalogoItem {
   iqms_aka: number;
@@ -10,7 +10,11 @@ interface CatalogoItem {
 class CatalogoChinaGateway {
   private baseURL: string;
 
-  constructor(baseURL: string = "http://localhost:3000/catalogoChina") {
+<<<<<<< Updated upstream
+  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/catalogoChina") {
+=======
+  constructor(baseURL: string = "http://192.168.0.8:3000/catalogoChina") {
+>>>>>>> Stashed changes
     this.baseURL = baseURL;
   }
 
@@ -35,6 +39,7 @@ class CatalogoChinaGateway {
       throw error;
     }
   }
+
 
   async getByMolde(molde: string): Promise<CatalogoItem> {
     try {

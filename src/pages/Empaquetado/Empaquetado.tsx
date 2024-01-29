@@ -6,7 +6,7 @@ export default function Empaquetado() {
   return (
     <>
         <Header />
-        <Title text={"Empaquetado"} />
+        <Title text="Empaquetado" />
         <Stage stage="Empaquetado" />
     </>
   )

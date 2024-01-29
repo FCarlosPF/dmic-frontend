@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import "./Login.css";
 import Banner from "../../assets/img/BannerLogin.jpg";
 import LoginGateway from "../../gateways/LoginGateway";
-import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 interface FormData {
   email: string;
@@ -36,10 +36,8 @@ export const Login = () => {
     try {
       const response = await loginGateway.login(formData);
 
-      // Verificar si la respuesta fue exitosa y tomar acciones en consecuencia
       if (response.status === 201) {
-        // Éxito, puedes redirigir al usuario o hacer cualquier otra acción necesaria
-        console.log("Login exitoso!");
+        localStorage.setItem("role", response.data.role)
         navigate("/catalogos");
       }
     } catch (error) {
@@ -51,7 +49,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row login">
         <div className="col-lg-6">
           <Container className="d-flex flex-column justify-content-center align-items-center vh-100">
             <img src={Banner} alt="Banner Image" className="img-fluid" />

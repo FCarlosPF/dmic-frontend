@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import label1 from "../../assets/img/Etiqueta 1_page-0001.jpg";
 import label3 from "../../assets/img/Etiqueta 3_page-0001.jpg";
 import label2 from "../../assets/img/Etiqueta2.png";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import "./Impresion.css";
-import Swal from "sweetalert2";
 
 
 const Impresion: React.FC = () => {
@@ -15,7 +15,6 @@ const Impresion: React.FC = () => {
 
   const catalogo = localStorage.getItem("catalogo");
   console.log(catalogo, stage);
-
 
 
   function labelImage() {
@@ -43,54 +42,46 @@ const Impresion: React.FC = () => {
     };
   };
 
+  const handleSuccess = () => {
+    Swal.fire({
+      title: "Proceso Exitoso",
+      text: "Proceso completado con éxito",
+      icon: "success"
+    });
+    navigate('/catalogos');
+  };
+
+
   function NextStage() {
     switch (catalogo) {
       case "USA":
-
-        if (stage == "Incoming") {
-          navigate('/empaquetado')
-        } else if (stage == "Empaquetado") {
-          navigate('/embarque')
+        if (stage === "Incoming") {
+          //navigate('/empaquetado');
+          handleSuccess();
+        } else if (stage === "Empaquetado") {
+          handleSuccess();
+          //navigate('/embarque');
         } else {
-          Swal.fire({
-            title: "Proceso Exitoso",
-            text: "Proceso completado con exito",
-            icon: "success"
-          });
-          navigate('/catalogos')
+          handleSuccess();
         }
         break;
 
       case "China":
-
-        if (stage == "Incoming") {
-          navigate('/embarque')
-        } else if (stage == "Embarque") {
-          Swal.fire({
-            title: "Proceso Exitoso",
-            text: "Proceso completado con exito",
-            icon: "success"
-          });
-          navigate('/catalogos')
+        if (stage === "Incoming") {
+          handleSuccess();
+        } else if (stage === "Embarque") {
+          handleSuccess();
         }
-
         break;
 
       case "Queretaro":
-       
-      if (stage == "Empaquetado") {
-          navigate('/embarque')
-        } else if (stage == "Embarque") {
-          Swal.fire({
-            title: "Proceso Exitoso",
-            text: "Proceso completado con exito",
-            icon: "success"
-          });
-          navigate('/catalogos')
+        if (stage === "Empaquetado") {
+          handleSuccess();
+          //navigate('/embarque');
+        } else if (stage === "Embarque") {
+          handleSuccess();
         }
-
         break;
-
 
       default:
         break;

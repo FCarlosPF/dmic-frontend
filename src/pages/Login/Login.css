@@ -3,9 +3,21 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
   }
 
+.img-fluid{
+  width: 70%;
+}
+
+.login{
+  max-height: 100vh;
+}
+
 .formulario-container {
     background-color: #030467;
     height: 100vh; 
+  }
+
+  .login-form{
+    width: 80%;
   }
   
   .form-title {
@@ -35,13 +47,14 @@ body {
   
   .login-submit-button {
     margin-top: 3vh;
-    background-color: #5CCEFF;
+    background-color: orange;
     border: none;
     padding: 0.4rem;
     font-size: 1rem;
-    width: 10em;
+    font-weight: 600;
+    width: 50%;
     border-radius: 0.5rem;
-    color: white;
+    color: black;
     box-shadow: 0 0.1rem #dad7d7;
     cursor: pointer;
   }

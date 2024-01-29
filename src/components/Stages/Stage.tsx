@@ -1,41 +1,63 @@
 import { useEffect, useState } from "react";
 import BarcodeScanner from "../BarCodeScanner";
 import FileUploadWrapper from "../FileUploadWrapper";
-import { Search__USA_QRO, SearchChina } from "../Search/search";
+import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
+
+
 
 export const Stage = (props: { stage: string }) => {
   let catalogo = localStorage.getItem("catalogo");
 
-  const [scannedBarcode, setScannedBarcode] = useState("");
-  const [, setSearchSerial] = useState(0);
+  const [scannedBarcode, setScannedBarcode] = useState("")
+  const [, setSearchSerial] = useState(0)
+  const [hasPermissions, setHasPermissions] = useState<null | true | false>(null);
 
   function handleSearch(iqms: number) {
     console.log("iqms:", iqms);
     setSearchSerial(iqms);
   }
 
+
+
   const handleScan = (barcode: string) => {
-    // Aquí puedes manejar la respuesta del servidor
-    // Por ejemplo, puedes hacer una solicitud al backend para obtener más información sobre el producto
-
-    // Supongamos que tu API devuelve un objeto con la información del producto
-
-    console.log(barcode);
     setScannedBarcode(barcode);
+  };
 
-    /*fetch(`http://localhost:3000/catalogoChina/iqms/${barcode}`)
-      .then((response) => response.json())
-      .then((product) => {
-        console.log('Producto encontrado:', product);
-        setScannedBarcode(barcode);
-        // Realiza las acciones necesarias con la información del producto
+
+
+
+
+
+<<<<<<< Updated upstream
+ useEffect(() => {
+=======
+  useEffect(() => {
+>>>>>>> Stashed changes
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: false })
+      .then((stream) => {
+        console.log(stream)
+        setHasPermissions(true);
       })
       .catch((error) => {
-        console.error('Error al obtener el producto:', error);
-        setScannedBarcode("");
-      });*/
-  };
+        setHasPermissions(false);
+        console.error(error);
+      });
+  }, []);
+
+
+ /*const handleCamera = () => {
+    Swal.fire({
+      title: "Debes otorgar permiso para la camara ",
+      showCancelButton: true,
+      timer: 5000
+    })
+
+    return ""
+  }*/
+
+
 
   return (
     <div>
@@ -65,16 +87,22 @@ export const Stage = (props: { stage: string }) => {
         </section>
         <section>
           <h3 className="step-title">2. Escanear con el codigo de barras</h3>
+        
+<<<<<<< Updated upstream
+       { hasPermissions &&
+            <BarcodeScanner onScan={handleScan} />
+       }
+=======
+        { hasPermissions &&
+            <BarcodeScanner onScan={handleScan} />
+        }
+          
+>>>>>>> Stashed changes
+          <p>
+            Producto encontrado con el código de barras:
+            {scannedBarcode}
+          </p>
 
-          <BarcodeScanner onScan={handleScan} />
-          {scannedBarcode ? (
-            <p>
-              Producto encontrado con el código de barras:
-              {scannedBarcode}
-            </p>
-          ) : (
-            <p>Aún no ha escaneado un código de barras.</p>
-          )}
         </section>
 
         <section>

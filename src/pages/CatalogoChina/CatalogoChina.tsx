@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { CatalogoChinaForm } from "../../components/Catalogos/CatalogoChina/CatalogoChinaForm";
 import Header from "../../components/Header/Header";
@@ -16,28 +16,14 @@ interface CatalogoItem {
 export const CatalogoChina = () => {
   const [catalogo, setCatalogo] = useState<CatalogoItem[]>([]);
   const catalogoGateway = new CatalogoChinaGateway();
-  const [] = useState<CatalogoItem>({
-    iqms_aka: 0,
-    iqms_dg: 0,
-    molde: "",
-    imagen: "",
-  });
-  const [] = useState<number>(0);
-  const [] = useState<string>("");
-  const [] = useState<string | null>(null);
 
-  const [] =
-    useState<CatalogoItem | null>(null);
 
   useEffect(() => {
     catalogoGateway
       .getAll()
       .then((data) => {
-        setCatalogo(data);
-        //console.log("Tipo de dato de catalogo:", typeof data);
-        /* if (data.length > 0 && data[0].imagen) {
-          console.log("Tipo de dato de la primera imagen:", typeof data[0].imagen);
-        } */
+        console.log(data)
+        setCatalogo(data)
       })
       .catch((error) =>
         console.error("Error al obtener elementos del catálogo:", error)
@@ -75,6 +61,8 @@ export const CatalogoChina = () => {
       })
       .catch((error) => console.error("Error al eliminar elemento:", error));
   };
+
+
 /*
   const buscarPorIQMS = async (
     event: React.KeyboardEvent<HTMLInputElement>
@@ -122,10 +110,11 @@ export const CatalogoChina = () => {
                 <th className="table-header">IQMS_DG</th>
                 <th className="table-header">MOLDE</th>
                 <th className="table-header">IMAGEN</th>
+                <th className="table-header"></th>
               </tr>
             </thead>
             <tbody>
-              {catalogo.map((elemento, index) => {
+              {catalogo && catalogo.map((elemento, index) => {
                 console.log(elemento.imagen);
 
                 return (
@@ -135,10 +124,10 @@ export const CatalogoChina = () => {
                     <td className="table-element">{elemento.molde}</td>
                     <td className="table-element">
                       {elemento.imagen &&
-                      typeof elemento.imagen === "object" &&
-                      "type" in elemento.imagen &&
-                      elemento.imagen.type === "Buffer" &&
-                      "data" in elemento.imagen ? (
+                        typeof elemento.imagen === "object" &&
+                        "type" in elemento.imagen &&
+                        elemento.imagen.type === "Buffer" &&
+                        "data" in elemento.imagen ? (
                         <img
                           src={URL.createObjectURL(
                             new Blob([new Uint8Array(elemento.imagen.data)])
@@ -149,9 +138,6 @@ export const CatalogoChina = () => {
                         "Imagen no válida"
                       )}
                     </td>
-                    {/*                     <td>
-                      <BarCode additionalProp={elemento.iqms} />
-                    </td> */}
                     <td>
                       <button
                         className="table-button-delete"

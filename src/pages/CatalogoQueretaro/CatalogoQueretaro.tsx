@@ -1,9 +1,9 @@
-import "./CatalogoQueretaro.css";
-import Header from "../../components/Header/Header";
-import Title from "../../components/Title/Title";
+import { Container } from "react-bootstrap";
 import { Catalogo_USA_QRO_Form } from "../../components/Catalogos/Catalogo_USA_QRO/Catalogo_USA_QRO_Form";
 import { Catalogo_USA_QRO_Table } from "../../components/Catalogos/Catalogo_USA_QRO/Catalogo_USA_QRO_Table";
-import { Container } from "react-bootstrap";
+import Header from "../../components/Header/Header";
+import Title from "../../components/Title/Title";
+import "./CatalogoQueretaro.css";
 
 
 export const CatalogoQueretaro = () => {

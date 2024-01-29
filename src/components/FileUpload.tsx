@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./components.css"
 
 interface FileUploadProps {
   onUpload: (responseValue: string) => void;
@@ -48,17 +49,17 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   };
 
   function renderInputFile() {
-    return(
-      <input type="file" onChange={onFileChange} />
+    return (
+      <input className='input-file' type="file" onChange={onFileChange} />
     )
   }
 
   return (
     <div>
-      {stage === "/embarque" && renderInputFile() }
+      {stage === "/embarque" && renderInputFile()}
       <hr />
-      <input  type="text" value={textInput} onChange={onTextChange} />
-      <button  onClick={onUploads}>Subir Archivo o Verificar Texto</button>
+      <input className='input-file' type="text" value={textInput} onChange={onTextChange} />
+      <button className='btn-file' onClick={onUploads}>Subir Archivo o Verificar Texto</button>
       {responseValue && <p>Valor retornado: {responseValue}</p>}
     </div>
   );

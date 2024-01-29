@@ -19,8 +19,8 @@ const BarcodeScanner: React.FC<BarcodeScannerProps> = ({ onScan }) => {
           type: 'LiveStream',
           target: videoRef.current, // Cambiado de document.querySelector a videoRef.current
           constraints: {
-            width: 640,
-            height: 300,
+            width: 100,
+            height: 60,
             facingMode: 'environment', // usa la cámara trasera (back camera) si está disponible
           },
         },

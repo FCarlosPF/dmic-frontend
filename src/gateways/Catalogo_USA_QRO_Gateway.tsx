@@ -10,15 +10,19 @@ interface CatalogoItem {
   foto: any;
 }
 
-class Catalogo_USA_QRO_Gateway{
+class Catalogo_USA_QRO_Gateway {
   private baseURL: string;
 
-  constructor(baseURL: string = "http://localhost:3000/producto-queretaro") {
+<<<<<<< Updated upstream
+  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/producto-queretaro") {
+=======
+  constructor(baseURL: string = "http:192.168.0.8:3000/producto-queretaro") {
+>>>>>>> Stashed changes
     this.baseURL = baseURL;
   }
 
-   // Agregar un nuevo elemento
-   async create(data: FormData): Promise<CatalogoItem> {
+  // Agregar un nuevo elemento
+  async create(data: FormData): Promise<CatalogoItem> {
     try {
       const response: AxiosResponse<CatalogoItem> = await axios.post(this.baseURL, data);
       return response.data;
@@ -46,7 +50,7 @@ class Catalogo_USA_QRO_Gateway{
   }
 
   // Obtener un elemento por su ID
-  async getById(iqms: number): Promise<CatalogoItem> {
+   async getById(iqms: number): Promise<CatalogoItem> {
     try {
       const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms}`);
       return response.data;
@@ -64,7 +68,7 @@ class Catalogo_USA_QRO_Gateway{
     }
   }
 
- 
+
   // Actualizar un elemento por su ID
   async update(iqms: number, data: CatalogoItem): Promise<CatalogoItem> {
     try {
