@@ -79,7 +79,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
                   <th className="table-header">IQMS_AKA</th>
                   <th className="table-header">FAMILIA_DG</th>
                   <th className="table-header">MOLDE</th>
-                  <th className="table-header">FOTO</th>
+                  {/* <th className="table-header">FOTO</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -89,7 +89,26 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
                   </td>
                   <td className="table-element">{resultadoBusqueda.iqms_dg}</td>
                   <td className="table-element">{resultadoBusqueda.molde}</td>
-                  {resultadoBusqueda.imagen &&
+                  {/* {resultadoBusqueda.imagen &&
+                  typeof resultadoBusqueda.imagen === "object" &&
+                  "type" in resultadoBusqueda.imagen &&
+                  resultadoBusqueda.imagen.type === "Buffer" &&
+                  "data" in resultadoBusqueda.imagen ? (
+                    <img style={{ maxWidth: '100%', height: 'auto' }}
+                      src={URL.createObjectURL(
+                        new Blob([
+                          new Uint8Array(resultadoBusqueda.imagen.data),
+                        ])
+                      )}
+                      alt={`Imagen ${resultadoBusqueda.iqms_aka}`}
+                    />
+                  ) : (
+                    "Imagen no válida"
+                  )} */}
+                </tr>
+              </tbody>
+            </table>
+            {resultadoBusqueda.imagen &&
                   typeof resultadoBusqueda.imagen === "object" &&
                   "type" in resultadoBusqueda.imagen &&
                   resultadoBusqueda.imagen.type === "Buffer" &&
@@ -105,9 +124,6 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
                   ) : (
                     "Imagen no válida"
                   )}
-                </tr>
-              </tbody>
-            </table>
           </div>
         )}
       </section>
@@ -197,7 +213,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
               <th>FAMILIA</th>
               <th>MOLDE1</th>
               <th>MOLDE2</th>
-              <th>FOTO</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -209,7 +225,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
                 <td className="table-element">{resultadoBusqueda.familia}</td>
                 <td className="table-element">{resultadoBusqueda.molde1}</td>
                 <td className="table-element">{resultadoBusqueda.molde2}</td>
-                <td className="table-element">
+                {/* <td className="table-element">
                   {resultadoBusqueda.foto &&
                   typeof resultadoBusqueda.foto === "object" &&
                   "type" in resultadoBusqueda.foto &&
@@ -224,11 +240,29 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
                   ) : (
                     "Imagen no válida"
                   )}
-                </td>
+                </td> */}
               </tr>
             )}
           </tbody>
             </table>
+                  {resultadoBusqueda.foto &&
+                  typeof resultadoBusqueda.foto === "object" &&
+                  "type" in resultadoBusqueda.foto &&
+                  resultadoBusqueda.foto.type === "Buffer" &&
+                  "data" in resultadoBusqueda.foto ? (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            
+                    <img style={{ maxWidth: '100%', height: 'auto' }}
+                      src={URL.createObjectURL(
+                        new Blob([new Uint8Array(resultadoBusqueda.foto.data)])
+                      )}
+                      alt={`Imagen ${resultadoBusqueda.iqms1}`}
+                    />
+                    </div>
+                  ) : (
+                    "Imagen no válida"
+                  )}
+                
           </div>
         )}
       </section>
