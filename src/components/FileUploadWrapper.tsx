@@ -33,7 +33,7 @@ const FileUploadWrapper = (props: {
     }
   }, [scannedCode2, props.scannedBarcode2]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (responseValues.length === 2 && responseValues[0] !== responseValues[1]) {
       setScannedCode1("");
       setScannedCode2("");
@@ -43,7 +43,7 @@ const FileUploadWrapper = (props: {
       //setResponseValues((prevValues) => [...prevValues, responseValue]);
       console.log("Códigos limpios");
     }
-  }, [responseValues]);
+  }, [responseValues]); */
 
   const renderVerificationResult = () => {
     if (
@@ -62,8 +62,17 @@ const FileUploadWrapper = (props: {
       );
     } else if (
       responseValues.length === 2 &&
-      responseValues[0] != responseValues[1]
+      responseValues[0] !== responseValues[1]
     ) {
+
+      setResponseValues(prevValues => prevValues.slice(2));
+      setScannedCode1("");
+      setScannedCode2("");
+      
+      console.log("error responseValues[0]: " + responseValues[0]);
+console.log("error responseValues[1]: " + responseValues[1]);
+console.log("lenght: " + responseValues.length);
+
       Swal.fire({
         title: "Validación erronea",
         text: "Los seriales no coinciden o no han ingresado los dos codigos",
@@ -73,7 +82,7 @@ const FileUploadWrapper = (props: {
       });
     }
   };
-
+  
   return (
     <div>
       <FileUpload

@@ -61,20 +61,19 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, scannedCode }) => {
   };
   const onUploadsLimpiar = async () => {
     try {
-       if (selectedFile) {
-        
+       if (selectedFile) {        
         setResponseValue("");
-        onUpload("");
+        //onUpload("");
         setTextInput("");
       } else if (textInput) {
         // Handle text input verification
         setResponseValue("");
-        onUpload("");
+        //onUpload("");
         setTextInput("");
         console.log('borado serial extraído (desde texto)');
       } else if (code) {
         setResponseValue("");
-        onUpload("");
+        //onUpload("");
         setTextBarInput("");
         console.log('borrado Codigo de barras escanneado:');
       } else {
@@ -93,7 +92,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, scannedCode }) => {
 
   useEffect(() => {
     if (!code) {
-      
           setTextBarInput(scannedCode);
       }
       console.log("codigoFile-> " + code);
@@ -110,10 +108,17 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, scannedCode }) => {
       <>
       <br></br>
       <br></br>
-      <input className="file-input" type="file" onChange={onFileChange} />
-<input type="text" value={textInput} onChange={onTextChange} />
-<button className="upload-button" onClick={onUploads}>Subir Archivo</button>
+      <div className='input-buttons'>
+      <input type="text" value={textInput} onChange={onTextChange} />
+      <div className='container-buttons'>
+      <button className="upload-button" onClick={onUploads}>Subir Archivo</button>
 <button className="clear-button" onClick={onUploadsLimpiar}>Limpiar</button>
+
+      </div>
+
+
+      </div>
+
         {/* {errorState && <><button onClick={handleCleanFile}>Limpiar</button></>} */}
         {responseValue && <p>Valor retornado: {responseValue}</p>}
         </>
