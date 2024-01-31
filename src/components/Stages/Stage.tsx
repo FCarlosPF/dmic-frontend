@@ -9,41 +9,19 @@ export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
   let catalogo = localStorage.getItem("catalogo");
 
-  const [scannedBarcode1, setScannedBarcode1] = useState("");
-  const [scannedBarcode2, setScannedBarcode2] = useState("");
-  const [activateSecondScanner, setActivateSecondScanner] = useState(false);
-  const [activateFirstScanner, setActivateFirstScanner] = useState(true);
 
-  const [, setSearchSerial] = useState(0);
+  const [searchSerial, setSearchSerial] = useState(0);
 
-  function handleSearch(iqms: number) {
-    console.log("iqms:", iqms);
+  function handleSearch(iqms: number, iqms_dg: number) {
+    console.log("iqms->", iqms);
+    console.log("iqms_dg->", iqms_dg);
     setSearchSerial(iqms);
   }
+   useEffect(() => {
+    console.log("searchSerial updated:", searchSerial);
+  }, [searchSerial]);
 
-  const handleScan = (barcode: string) => {
-    if (!scannedBarcode1) {
-      setScannedBarcode1(barcode);
-      console.log("codigoStage1" + barcode);
-      setTimeout(() => {
-        setActivateSecondScanner(true);
-        setActivateFirstScanner(false);
-      }, 2000);
-    }
-    /* console.log("second?", activateSecondScanner);
-    console.log("first?", activateSecondScanner); */
-  };
-
-  const handleScan2 = (barcode: string) => {
-    if (scannedBarcode1) {
-      setScannedBarcode2(barcode);
-      console.log("codigoStage2" + barcode);
-      setActivateSecondScanner(false);
-      setActivateFirstScanner(true);
-    }
-   /*  console.log("second->", activateSecondScanner);
-    console.log("first->", activateSecondScanner); */
-  };
+  
 
   return (
     <div>
@@ -75,33 +53,13 @@ export const Stage = (props: { stage: string }) => {
           </>
 )}
         </section>
-        <section>
-          <h3 className="step-title">Escanear con el codigo de barras</h3>
-          {activateFirstScanner && <BarcodeScanner onScan={handleScan} />}
-          {scannedBarcode1 ? (
-            <p>
-              Producto encontrado con el código de barras: {scannedBarcode1}
-            </p>
-          ) : (
-            <p>Aún no ha escaneado un código de barras.</p>
-          )}
-          {activateSecondScanner && <BarcodeScanner2 onScan={handleScan2} />}
-          {/* {scannedBarcode2 ? (
-            <p>
-              Producto encontrado con el segundo código de barras:{" "}
-              {scannedBarcode2}
-            </p>
-          ) : (
-            <p>Aún no ha escaneado el segundo código de barras.</p>
-          )} */}
-        </section>
+        
 
         <section>
           <h3 className="step-title">Comparar </h3>
           <FileUploadWrapper
             stage={props.stage}
-            scannedBarcode1={scannedBarcode1}
-            scannedBarcode2={scannedBarcode2}
+            iqms_serial={searchSerial.toString()}
           />
         </section>
       </main>

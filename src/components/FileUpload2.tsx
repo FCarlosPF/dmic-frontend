@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./FileUpload.css";
 
-interface FileUploadProps {
+interface FileUploadProps2 {
   onUpload: (responseValue: string) => void;
-  serial: string;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
+const FileUpload2: React.FC<FileUploadProps2> = ({ onUpload }) => {
   const stage = window.location.pathname;
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -23,7 +22,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
   const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextInput(event.target.value);
   };
-
   const onUploads = async () => {
     try {
       if (selectedFile) {
@@ -39,12 +37,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
         onUpload(response.data);
         setTextInput(response.data);
         console.log("Número serial extraído:", response.data);
-      } else if (serial!=="0") {
+      } else if (textInput && textInput!=="0") {
         // Handle text input verification
-        setResponseValue(serial);
-        onUpload(serial);
+        setResponseValue(textInput);
+        onUpload(textInput);
         console.log("Número serial extraído (desde texto):", textInput);
-      }else {
+      
+      } else {
         console.error(
           "No se ha seleccionado ningún archivo ni se ha ingresado texto."
         );
@@ -65,7 +64,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
         onUpload("");
         setTextInput("");
         console.log("borado serial extraído (desde texto)");
-      }else {
+      } else {
         console.error(
           "No se ha seleccionado ningún archivo ni se ha ingresado texto."
         );
@@ -79,10 +78,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
     return <input type="file" onChange={onFileChange} />;
   }
 
-  useEffect(() => {
-    setTextInput(serial);
-   
-  }, [serial]);
   return (
     <div>
       {stage === "/embarque" && (
@@ -121,6 +116,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
           <button className="upload-button" onClick={onUploads}>
             Verificar Texto
           </button>
+          <button className="clear-button" onClick={onUploadsLimpiar}>
+            Limpiar
+          </button>
           {/* {errorState && <><button onClick={handleCleanText}>Limpiar</button></>} */}
           {responseValue && <p>Valor retornado: {responseValue}</p>}
         </>
@@ -129,4 +127,4 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
   );
 };
 
-export default FileUpload;
+export default FileUpload2;

@@ -9,7 +9,7 @@ interface CatalogoItemChina {
   iqms_dg: number;
   molde: string;
   imagen: any;
-  onSearch?: (iqms: number) => void;
+  onSearch?: (iqms: number, iqms_dg: number) => void;
 }
 
 const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
@@ -25,25 +25,26 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
       const resultado = await catalogoGateway.getById(busquedaIQMS);
       console.log(resultado);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms_aka);
+      onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
       console.log("Resultado de la búsqueda:", resultado);
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
+      Swal.fire({
+        title: "Producto no encontrado",
+        text: "No se encontró ningún producto con el IQMS proporcionado.",
+        icon: "info",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Aceptar"
+      });
     }
-    Swal.fire({
-      title: "Producto no encontrado",
-      text: "No se encontró ningún producto con el IQMS proporcionado.",
-      icon: "info",
-      confirmButtonColor: "#3085d6",
-      confirmButtonText: "Aceptar"
-    });
+    
   };
 
   const buscarPorMolde = async () => {
     try {
       const resultado = await catalogoGateway.getByMolde(busquedaMolde);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms_aka);
+      onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
       console.log("Resultado de la búsqueda:", resultado);
     } catch (error) {
       console.error("Error al realizar la búsqueda por Molde:", error);
@@ -154,7 +155,7 @@ interface CatalogoItem_USA_QRO {
   molde1: string;
   molde2: string;
   foto: any;
-  onSearch?: (iqms: number) => void;
+  onSearch?: (iqms: number, iqms_dg: number) => void;
 }
 
 const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
@@ -170,7 +171,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
       const resultado = await catalogoGateway.getById(busquedaIQMS);
       console.log(resultado);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms1);
+      onSearch && onSearch(resultado.iqms1, resultado.iqms2);
       console.log("Resultado de la búsqueda:", resultado);
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
@@ -188,7 +189,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
     try {
       const resultado = await catalogoGateway.getByMolde(busquedaMolde);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms1);
+      onSearch && onSearch(resultado.iqms1,resultado.iqms2);
       console.log("Resultado de la búsqueda:", resultado);
     } catch (error) {
       console.error("Error al realizar la búsqueda por Molde:", error);

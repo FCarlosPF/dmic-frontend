@@ -2,58 +2,44 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import FileUpload from "./FileUpload";
+import FileUpload2 from "./FileUpload2";
 
 const FileUploadWrapper = (props: {
   stage: any;
-  scannedBarcode1: string;
-  scannedBarcode2: string;
+  iqms_serial: string;
 }) => {
-  const [responseValues, setResponseValues] = useState<string[]>([]);
-  const [scannedCode1, setScannedCode1] = useState<string>("");
-  const [scannedCode2, setScannedCode2] = useState<string>("");
-  const navigate = useNavigate();
+  const [responseValues1, setResponseValues1] = useState<string[]>([]); 
+  const [responseValues2, setResponseValues2] = useState<string[]>([]);  
+  const [searchSerial, setSearchSerial] = useState<string>("");
 
 
-  const onFileUpload = (responseValue: string) => {
-    setResponseValues((prevValues) => [...prevValues, responseValue]);
+  const onFileUpload1 = (responseValue: string) => {
+    setResponseValues1((prevValues) => [...prevValues, responseValue]);
   };
-  useEffect(() => {
-    if (!scannedCode1) {
-      setScannedCode1(props.scannedBarcode1);
-    } else {
-      console.log("scanner1-> " + scannedCode1);
-    }
-  }, [scannedCode1, props.scannedBarcode1]);
+  const onFileUpload2 = (responseValue: string) => {
+    setResponseValues2((prevValues) => [...prevValues, responseValue]);
+  };
 
   useEffect(() => {
-    if (!scannedCode2) {
-      setScannedCode2(props.scannedBarcode2);
-    } else {
-      console.log("scanner2-> " + scannedCode2);
-    }
-  }, [scannedCode2, props.scannedBarcode2]);
+    console.log("IqmsWrapper-> "+props.iqms_serial);
+    console.log(" responseValues[0]: " + responseValues1[0]);
+console.log(" responseValues[1]: " + responseValues2[1]);
+console.log("lenght1: " + responseValues1.length);
+console.log("lenght2: " + responseValues2.length);
+    setSearchSerial(props.iqms_serial);
+  }, [props.iqms_serial]);
 
-  /* useEffect(() => {
-    if (responseValues.length === 2 && responseValues[0] !== responseValues[1]) {
-      setScannedCode1("");
-      setScannedCode2("");
-      setResponseValues([]);
-      console.log("values 0 ->" + responseValues[0]);
-      console.log("values 1 ->" + responseValues[1]);
-      //setResponseValues((prevValues) => [...prevValues, responseValue]);
-      console.log("Códigos limpios");
-    }
-  }, [responseValues]); */
 
   const renderVerificationResult = () => {
     if (
-      responseValues.length === 2 &&
-      responseValues[0] === responseValues[1]
+      responseValues1.length > 0 &&
+      responseValues2.length > 0 &&
+      responseValues1[0] === responseValues2[0]
     ) {
       return (
         <>
           <p style={{ fontSize: "larger" }}>
-            Los valores coinciden: {responseValues[0]}
+            Los valores coinciden: {responseValues1[0]}
           </p>
           <Link to={`/etiqueta/${props.stage}`}>
             <button className="print-button">Imprimir Etiqueta</button>
@@ -61,17 +47,18 @@ const FileUploadWrapper = (props: {
         </>
       );
     } else if (
-      responseValues.length === 2 &&
-      responseValues[0] !== responseValues[1]
+      responseValues1.length > 0 &&
+      responseValues2.length > 0 &&
+      responseValues1[0] !== responseValues2[0]
     ) {
 
-      setResponseValues(prevValues => prevValues.slice(2));
-      setScannedCode1("");
-      setScannedCode2("");
+      setResponseValues2(prevValues => prevValues.slice(1));
       
-      console.log("error responseValues[0]: " + responseValues[0]);
-console.log("error responseValues[1]: " + responseValues[1]);
-console.log("lenght: " + responseValues.length);
+      console.log("error responseValues1[0]: " + responseValues1[0]);
+console.log("error responseValues1[1]: " + responseValues1[1]);
+console.log("error responseValues2[0]: " + responseValues2[0]);
+console.log("error responseValues2[1]: " + responseValues2[1]);
+console.log("lenght: " + responseValues1.length);
 
       Swal.fire({
         title: "Validación erronea",
@@ -86,13 +73,12 @@ console.log("lenght: " + responseValues.length);
   return (
     <div>
       <FileUpload
-        onUpload={(responseValue) => onFileUpload(responseValue)}
-        scannedCode={scannedCode1}
+        onUpload={(responseValue) => onFileUpload1(responseValue)}
+        serial={props.iqms_serial}
       />
       <hr />
-      <FileUpload
-        onUpload={(responseValue) => onFileUpload(responseValue)}
-        scannedCode={scannedCode2}
+      <FileUpload2
+        onUpload={(responseValue) => onFileUpload2(responseValue)}
       />
       {renderVerificationResult()}
     </div>
