@@ -12,7 +12,7 @@ class CatalogoChinaGateway {
 
 
   
-  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/catalogoChina") {
+  constructor(baseURL: string = "http://192.168.0.8:3000/catalogoChina") {
     this.baseURL = baseURL;
   }
 
@@ -32,6 +32,7 @@ class CatalogoChinaGateway {
   async getById(iqms: number): Promise<CatalogoItem> {
     try {
       const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms}`);
+      console.log(response)
       return response.data;
     } catch (error) {
       throw error;

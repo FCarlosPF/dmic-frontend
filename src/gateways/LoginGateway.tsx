@@ -15,7 +15,7 @@ class LoginGateway {
   private baseURL: string;
 
 
-  constructor(baseURL: string = "https://xk76wjzb-3000.use.devtunnels.ms/auth") {
+  constructor(baseURL: string = "http://192.168.0.8:3000/auth") {
     this.baseURL = baseURL;
   }
 
