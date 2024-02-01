@@ -3,11 +3,11 @@ import "./FileUpload.css";
 
 interface FileUploadProps {
   onUpload: (responseValue: string) => void;
+  stage: any;
   serial: string;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
-
+  const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
   const [textInput, setTextInput] = useState<string>("");
   const [responseValue, setResponseValue] = useState<string | null>(null);
 

@@ -4,27 +4,23 @@ import Swal from "sweetalert2";
 import FileUpload from "./FileUpload";
 import FileUpload2 from "./FileUpload2";
 
-const FileUploadWrapper = (props: {
-  stage: any;
-  iqms_serial: string;
-}) => {
-  console.log(props.stage)
+const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
+  console.log("props.stageWrapper-> " + props.stage);
   //const navigate = useNavigate();
 
-
- // const [responseValues, setResponseValues] = useState<string[]>([]);
+  // const [responseValues, setResponseValues] = useState<string[]>([]);
   //const [scannedCode1, setScannedCode1] = useState<string>("");
   //const [scannedCode2, setScannedCode2] = useState<string>("");
 
   const [responseValues1, setResponseValues1] = useState<string[]>([]);
   const [responseValues2, setResponseValues2] = useState<string[]>([]);
   const [, setSearchSerial] = useState<string>("");
-
+  let catalogo = localStorage.getItem("catalogo");
 
   const onFileUpload1 = (responseValue: string) => {
     setResponseValues1([responseValue]);
   };
-  
+
   const onFileUpload2 = (responseValue: string) => {
     setResponseValues2([responseValue]);
   };
@@ -40,7 +36,6 @@ const FileUploadWrapper = (props: {
      setScannedCode2(scannedCode2);
      console.log("serial 2 " + scannedCode2);
    };*/
-
 
   /*useEffect(() => {
     if (!scannedCode1) {
@@ -59,7 +54,6 @@ const FileUploadWrapper = (props: {
     setSearchSerial(props.iqms_serial);
   }, [props.iqms_serial]);
 
- 
   /*useEffect(() => {
 
     if (responseValues.length === 2 && responseValues[0] !== responseValues[1]) {
@@ -108,14 +102,14 @@ const FileUploadWrapper = (props: {
       responseValues2.length > 0 &&
       responseValues1[0] !== responseValues2[0]
     ) {
-
-      setResponseValues2(prevValues => prevValues.slice(1));
+      setResponseValues2((prevValues) => prevValues.slice(1));
 
       console.log("error responseValues1[0]: " + responseValues1[0]);
       console.log("error responseValues1[1]: " + responseValues1[1]);
       console.log("error responseValues2[0]: " + responseValues2[0]);
       console.log("error responseValues2[1]: " + responseValues2[1]);
-      console.log("lenght: " + responseValues1.length);
+      console.log("lenght1: " + responseValues1.length);
+      console.log("lenght2: " + responseValues2.length);
 
       Swal.fire({
         title: "Validación erronea",
@@ -129,15 +123,32 @@ const FileUploadWrapper = (props: {
 
   return (
     <div>
-      <FileUpload
-        onUpload={(responseValue) => onFileUpload1(responseValue)}
-        serial={props.iqms_serial}
-      />
-      <hr />
-      <FileUpload2
-        onUpload={(responseValue) => onFileUpload2(responseValue)}
-      />
-      {renderVerificationResult()}
+      {props.stage == "Incoming" && catalogo == "USA" && (
+        <>
+          <FileUpload2
+            onUpload={(responseValue) => onFileUpload2(responseValue)}
+          />
+          <FileUpload2
+            onUpload={(responseValue) => onFileUpload2(responseValue)}
+          />
+          {renderVerificationResult()}
+        </>
+      )}
+      {props.stage == "Incoming" ||
+        props.stage == "Empaquetado" && catalogo != "USA" && (
+          <>
+            <FileUpload
+              onUpload={(responseValue) => onFileUpload1(responseValue)}
+              serial={props.iqms_serial}
+              stage={props.stage}
+            />
+            <hr />
+            <FileUpload2
+              onUpload={(responseValue) => onFileUpload2(responseValue)}
+            />
+            {renderVerificationResult()}
+          </>
+        )}
     </div>
   );
 };

@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import FileUploadWrapper from "../FileUploadWrapper";
 import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
-
-
+import { Link } from "react-router-dom";
 
 export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
   const stage1 = window.location.hash.substring(1);
-  console.log(stage, stage1)
+  console.log(stage, stage1);
   let catalogo = localStorage.getItem("catalogo");
-
 
   const [searchSerial, setSearchSerial] = useState(0);
 
@@ -19,8 +17,25 @@ export const Stage = (props: { stage: string }) => {
     console.log("iqms_dg->", iqms_dg);
     setSearchSerial(iqms);
   }
+  const verificarEmbarque = () => {
+    if(searchSerial !== 0 ){
+      console.log(`/etiqueta/${props.stage.toLowerCase()}`)
+      return (
+        <>
+          <Link to={`/etiqueta/${props.stage.toLowerCase()}`}>
+            <button className="print-button">Imprimir Etiqueta</button>
+          </Link>
+        </>
+      );
+    }
+    console.log("No es igual")
+    return null;
+    
+  };
   useEffect(() => {
-    console.log("searchSerial updated:", searchSerial);
+    console.log("searchSerial updated: "+ searchSerial);
+    console.log("Props stage: "+  props.stage);
+    console.log("catalogolocalstage: "+ catalogo);
   }, [searchSerial]);
 
   /*useEffect(() => {
@@ -58,13 +73,10 @@ export const Stage = (props: { stage: string }) => {
     }
   };*/
 
-
-
-
   return (
     <div>
       <main className="incoming">
-        {props.stage != "Embarque" &&
+        {props.stage != "/embarque" && (
           <section>
             <>
               <h3 className="step-title">Búsqueda del producto</h3>
@@ -90,7 +102,7 @@ export const Stage = (props: { stage: string }) => {
               )}
             </>
           </section>
-        }
+        )}
         <section>
           {/*<h3 className="step-title">Escanear con el codigo de barras</h3>
           {activateFirstScanner && <BarcodeScanner onScan={handleScan} />}
@@ -112,13 +124,25 @@ export const Stage = (props: { stage: string }) => {
           )} */}
         </section>
 
-
         <section>
           <h3 className="step-title">Comparar </h3>
-          <FileUploadWrapper
-            stage={props.stage}
-            iqms_serial={(searchSerial ?? "0").toString()}
-          />
+          {props.stage == "Empaquetado" &&
+            catalogo == "Queretaro" && (
+              <>
+                <button className="upload-button" onClick={verificarEmbarque}>
+                  Verificar
+                </button>
+              </>
+            )}
+          {props.stage == "Incoming" ||
+            props.stage == "Embarque" && (
+              <>
+                <FileUploadWrapper
+                  stage={props.stage}
+                  iqms_serial={(searchSerial ?? "0").toString()}
+                />
+              </>
+            )}
         </section>
       </main>
     </div>
