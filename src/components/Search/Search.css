@@ -51,7 +51,7 @@
     flex: 2;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
-    padding: 10px;
+    padding: 1.2%;
     margin-right: 2%;
     font-size: 0.9rem;
   }
@@ -63,9 +63,9 @@
     font-weight: 450;
     font-family: 'Roboto', sans-serif;
     border-style: none;
-    font-size: 0.9rem;
-    padding: 12px 5px;
+    font-size: 1.2rem;
     flex: 1;
+    padding: 1.2%;
   }
   
   .contenedor-table-catalogo {

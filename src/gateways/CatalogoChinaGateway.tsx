@@ -12,7 +12,7 @@ class CatalogoChinaGateway {
 
 
   
-  constructor(baseURL: string = "http://192.168.0.8:3000/catalogoChina") {
+  constructor(baseURL: string = "http://localhost:3000/catalogoChina") {
     this.baseURL = baseURL;
   }
 

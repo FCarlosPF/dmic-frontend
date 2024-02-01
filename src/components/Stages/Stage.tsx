@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FileUploadWrapper from "../FileUploadWrapper";
 import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
@@ -8,30 +8,20 @@ import "./Stage.css";
 export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
   const stage1 = window.location.hash.substring(1);
-  console.log(stage,stage1)
+  console.log(stage, stage1)
   let catalogo = localStorage.getItem("catalogo");
 
-  const [scannedBarcode1, ] = useState("");
-  const [scannedBarcode2, ] = useState("");
- // const [activateSecondScanner, setActivateSecondScanner] = useState(false);
-  //const [, setActivateFirstScanner] = useState(true);
-  //const [hasPermissions, setHasPermissions] = useState<null | true | false>(null);
-  const [, setSearchSerial] = useState(0);
 
-  /*const handleCamera = () => {
-    Swal.fire({
-      title: "Debes otorgar permiso para la camara ",
-      showCancelButton: true,
-      timer: 5000
-    })
+  const [searchSerial, setSearchSerial] = useState(0);
 
-    return ""
-  }*/
-
-  function handleSearch(iqms: number) {
-    console.log("iqms:", iqms);
+  function handleSearch(iqms: number, iqms_dg: number) {
+    console.log("iqms->", iqms);
+    console.log("iqms_dg->", iqms_dg);
     setSearchSerial(iqms);
   }
+  useEffect(() => {
+    console.log("searchSerial updated:", searchSerial);
+  }, [searchSerial]);
 
   /*useEffect(() => {
     navigator.mediaDevices
@@ -70,38 +60,39 @@ export const Stage = (props: { stage: string }) => {
 
 
 
+
   return (
     <div>
       <main className="incoming">
+        {props.stage != "Embarque" &&
+          <section>
+            <>
+              <h3 className="step-title">Búsqueda del producto</h3>
+              {catalogo == "China" ? (
+                <SearchChina
+                  onSearch={handleSearch}
+                  iqms_aka={0}
+                  iqms_dg={0}
+                  molde={""}
+                  imagen={""}
+                />
+              ) : (
+                <Search__USA_QRO
+                  onSearch={handleSearch}
+                  iqms1={0}
+                  iqms2={0}
+                  iqms3={0}
+                  familia={""}
+                  molde1={""}
+                  molde2={""}
+                  foto={""}
+                />
+              )}
+            </>
+          </section>
+        }
         <section>
-        {stage != "/embarque" && stage1 != "/dmic/embarque" && (
-          <>
-          <h3 className="step-title">Búsqueda del producto</h3>
-          {catalogo == "China" ? (
-            <SearchChina
-              onSearch={handleSearch}
-              iqms_aka={0}
-              iqms_dg={0}
-              molde={""}
-              imagen={""}
-            />
-          ) : (
-            <Search__USA_QRO
-              onSearch={handleSearch}
-              iqms1={0}
-              iqms2={0}
-              iqms3={0}
-              familia={""}
-              molde1={""}
-              molde2={""}
-              foto={""}
-            />
-          )}
-          </>
-)}
-        </section>
-        <section>
-           {/*<h3 className="step-title">Escanear con el codigo de barras</h3>
+          {/*<h3 className="step-title">Escanear con el codigo de barras</h3>
           {activateFirstScanner && <BarcodeScanner onScan={handleScan} />}
           {scannedBarcode1 ? (
             <p>
@@ -121,12 +112,12 @@ export const Stage = (props: { stage: string }) => {
           )} */}
         </section>
 
+
         <section>
           <h3 className="step-title">Comparar </h3>
           <FileUploadWrapper
             stage={props.stage}
-            scannedBarcode1={scannedBarcode1}
-            scannedBarcode2={scannedBarcode2}
+            iqms_serial={(searchSerial ?? "0").toString()}
           />
         </section>
       </main>

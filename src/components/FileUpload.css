@@ -1,3 +1,13 @@
+.input-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-buttons input{
+  padding: 1%;
+  width: 50%;
+}
+
 .upload-button,
 .clear-button {
   border-radius: 0.5rem;
@@ -6,46 +16,17 @@
   font-weight: 450;
   font-family: 'Roboto', sans-serif;
   border-style: none;
-  font-size: 0.9rem;
-  padding: 8px 5px;
-  margin-right: 5px; 
+  font-size: 1.2rem;
+  height: 100%; 
+  padding: 1%;
 }
 
-.file-input {
-  margin-right: 5px;
-  min-height: 35px;
-}
 
-.input-buttons{
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  width: 100%;
-}
-
-.container-buttons{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  width: 100%;
-  padding-top: 10px;
-}
 
 @media screen and (width >= 780px) {
   .input-buttons{
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-  }
-  .container-buttons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-top: 10px;
   }
   
 }

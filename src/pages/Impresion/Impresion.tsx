@@ -49,39 +49,24 @@ const Impresion: React.FC = () => {
       text: "Proceso completado con éxito",
       icon: "success"
     });
-    navigate('/catalogos');
   };
 
 
   function NextStage() {
     switch (catalogo) {
       case "USA":
-        if (stage === "Incoming") {
-          //navigate('/empaquetado');
-          handleSuccess();
-        } else if (stage === "Empaquetado") {
-          handleSuccess();
-          //navigate('/embarque');
-        } else {
-          handleSuccess();
-        }
+        handleSuccess();
+        navigate('/usasteps');
         break;
 
       case "China":
-        if (stage === "Incoming") {
-          handleSuccess();
-        } else if (stage === "Embarque") {
-          handleSuccess();
-        }
+        handleSuccess();
+        navigate('/chinasteps');
         break;
 
       case "Queretaro":
-        if (stage === "Empaquetado") {
-          handleSuccess();
-          //navigate('/embarque');
-        } else if (stage === "Embarque") {
-          handleSuccess();
-        }
+        handleSuccess();
+        navigate('/queretarosteps');
         break;
 
       default:

@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./FileUpload.css";
 
-interface FileUploadProps {
+interface FileUploadProps2 {
   onUpload: (responseValue: string) => void;
-  serial: string;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
+const FileUpload2: React.FC<FileUploadProps2> = ({ onUpload }) => {
+
 
   const [textInput, setTextInput] = useState<string>("");
   const [responseValue, setResponseValue] = useState<string | null>(null);
 
-
-  useEffect(() => {
-    setTextInput(serial);
-    if(serial === "0"){
-      setTextInput("");
-    }
-  }, [serial]);
 
   const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextInput(event.target.value);
@@ -25,15 +18,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
 
   const onUploads = async () => {
     try {
-
-      if (textInput !== "0") {
+      if (textInput && textInput !== "0") {
         setResponseValue(textInput);
         onUpload(textInput);
         console.log("Número serial extraído (desde texto):", textInput);
-      } else if (serial !== "0") {
-        setResponseValue(serial);
-        onUpload(serial);
-        console.log("Número serial extraído (desde texto):", textInput);
+
       } else {
         console.error(
           "No se ha seleccionado ningún archivo ni se ha ingresado texto."
@@ -47,11 +36,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
   const onUploadsLimpiar = async () => {
     try {
       if (textInput) {
-        // Handle text input verification
+
         setResponseValue("");
         onUpload("");
         setTextInput("");
-        console.log("borado serial extraído (desde texto)");
+        console.log("borrado serial extraído (desde texto)");
       } else {
         console.error(
           "No se ha seleccionado ningún archivo ni se ha ingresado texto."
@@ -62,6 +51,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
     }
   };
 
+  
 
   return (
     <section className="comparison">
@@ -81,4 +71,4 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload, serial }) => {
   );
 };
 
-export default FileUpload;
+export default FileUpload2;

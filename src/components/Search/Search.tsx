@@ -10,22 +10,23 @@ interface CatalogoItemChina {
   iqms_dg: number;
   molde: string;
   imagen: any;
-  onSearch?: (iqms: number) => void;
+  onSearch?: (iqms: number, iqms_dg: number) => void;
 }
 
 const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
   let catalogoGateway = new CatalogoChinaGateway();
 
-  const [busquedaIQMS, setBusquedaIQMS] = useState<number>(0);
+  const [busquedaIQMS, setBusquedaIQMS] = useState<string>("");
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItemChina | null>(null);
 
   const buscarPorIQMS2 = async () => {
     try {
-      let resultado = await catalogoGateway.getById(busquedaIQMS);
-
-      console.log(resultado, typeof (resultado));
+      const resultado = await catalogoGateway.getById(parseInt(busquedaIQMS));
+      console.log(resultado);
+      setResultadoBusqueda(resultado);
+      onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
       console.log("Resultado de la búsqueda:", resultado);
 
       if (resultado.iqms_aka == null) {
@@ -40,11 +41,18 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
 
       if (resultado !== undefined) {
         setResultadoBusqueda(resultado);
-        onSearch && onSearch(resultado.iqms_aka);
+        onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
       }
 
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
+      Swal.fire({
+        title: "Producto no encontrado",
+        text: "No se encontró ningún producto con el IQMS proporcionado.",
+        icon: "info",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Aceptar"
+      });
     }
 
   };
@@ -53,7 +61,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
     try {
       const resultado = await catalogoGateway.getByMolde(busquedaMolde);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms_aka);
+      onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
       console.log("Resultado de la búsqueda:", resultado);
       resultado.iqms_aka == null &&
         Swal.fire({
@@ -83,7 +91,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
               placeholder="IQMS"
               className="catalogo-input"
               value={busquedaIQMS}
-              onChange={(e) => setBusquedaIQMS(parseInt(e.target.value))}
+              onChange={(e) => setBusquedaIQMS(e.target.value)}
             />
           </div>
 
@@ -181,13 +189,13 @@ interface CatalogoItem_USA_QRO {
   molde1: string;
   molde2: string;
   foto: any;
-  onSearch?: (iqms: number) => void;
+  onSearch?: (iqms: number, iqms_dg: number) => void;
 }
 
 const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
   let catalogoGateway = new Catalogo_USA_QRO_Gateway();
 
-  const [busquedaIQMS, setBusquedaIQMS] = useState<number>(0);
+  const [busquedaIQMS, setBusquedaIQMS] = useState<string>("");
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItem_USA_QRO | null>(null);
@@ -195,7 +203,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
 
   const buscarPorIQMS = async () => {
     try {
-      const resultado = await catalogoGateway.getById(busquedaIQMS);
+      const resultado = await catalogoGateway.getById(parseInt(busquedaIQMS));
       setResultadoBusqueda(resultado);
       if (resultado.iqms1 == null) {
         Swal.fire({
@@ -208,10 +216,8 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
       }
 
       console.log(resultado, typeof (resultado), resultadoBusqueda, typeof (resultadoBusqueda));
-      onSearch && onSearch(resultado.iqms1);
+      onSearch && onSearch(resultado.iqms1, resultado.iqms2);
       console.log("Resultado de la búsqueda:", resultado, typeof (resultado));
-
-
 
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
@@ -222,7 +228,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
     try {
       const resultado = await catalogoGateway.getByMolde(busquedaMolde);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms1);
+      onSearch && onSearch(resultado.iqms1, resultado.iqms2);
       console.log("Resultado de la búsqueda:", resultado);
       resultado.iqms1 == null &&
         Swal.fire({
@@ -252,7 +258,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
               placeholder="IQMS"
               className="catalogo-input"
               value={busquedaIQMS}
-              onChange={(e) => setBusquedaIQMS(parseInt(e.target.value))}
+              onChange={(e) => setBusquedaIQMS(e.target.value)}
             />
           </div>
 
@@ -260,18 +266,21 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
             Buscar
           </button>
         </div>
-        <p className="search-title">Buscar por Molde:</p>
+
         <div className="search-input-button">
-          <input
-            type="text"
-            placeholder="Buscar por Molde"
-            className="catalogo-input"
-            value={busquedaMolde}
-            onChange={(e) => setBusquedaMolde(e.target.value)}
-          />
-          <button className="search-button" onClick={buscarPorMolde}>
-            Buscar
-          </button>
+          <div className="search-label-input">
+            <label className="search-label">Buscar por Molde:</label>
+            <input
+              type="text"
+              placeholder="Buscar por Molde"
+              className="catalogo-input"
+              value={busquedaMolde}
+              onChange={(e) => setBusquedaMolde(e.target.value)}
+            />
+            <button className="search-button" onClick={buscarPorMolde}>
+              Buscar
+            </button>
+          </div>
         </div>
       </section>
       <hr />
