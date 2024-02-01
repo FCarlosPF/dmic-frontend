@@ -52,6 +52,7 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
     console.log("lenght1: " + responseValues1.length);
     console.log("lenght2: " + responseValues2.length);
     setSearchSerial(props.iqms_serial);
+    console.log(`/etiqueta/${props.stage}`);
   }, [props.iqms_serial]);
 
   /*useEffect(() => {
@@ -126,7 +127,7 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
       {props.stage == "Incoming" && catalogo == "USA" && (
         <>
           <FileUpload2
-            onUpload={(responseValue) => onFileUpload2(responseValue)}
+            onUpload={(responseValue) => onFileUpload1(responseValue)}
           />
           <FileUpload2
             onUpload={(responseValue) => onFileUpload2(responseValue)}
@@ -134,8 +135,22 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
           {renderVerificationResult()}
         </>
       )}
-      {props.stage == "Incoming" ||
-        props.stage == "Empaquetado" && catalogo != "USA" && (
+      {props.stage == "Incoming" && catalogo != "USA" && (
+          <>
+            <FileUpload
+              onUpload={(responseValue) => onFileUpload1(responseValue)}
+              serial={props.iqms_serial}
+              stage={props.stage}
+            />
+            <hr />
+            <FileUpload2
+              onUpload={(responseValue) => onFileUpload2(responseValue)}
+            />
+            {renderVerificationResult()}
+          </>
+        )}
+        
+        { props.stage == "Embarque"  && (
           <>
             <FileUpload
               onUpload={(responseValue) => onFileUpload1(responseValue)}

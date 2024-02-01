@@ -10,3 +10,26 @@
     font-weight: 900;
     margin: 2% 0 2% 0;
 }
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.upload-button-stage{
+    border-radius: 0.5rem;
+    background-color: var(--naval-blue-color);
+    text-align: center;    
+    height: 100%; 
+    width: 60%;
+    padding: 1%;
+}
+.upload-button-label{
+    font-weight: 450;
+    font-family: 'Roboto', sans-serif;
+    border-style: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: white;
+}

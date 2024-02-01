@@ -85,10 +85,11 @@
 
   .search-card{
     display: flex;
+    flex-direction: column;
     border-radius: 15px;
     background-color: aliceblue;
     padding: 2%;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-around;
   }
 
@@ -114,7 +115,7 @@
 }
 
 .search-card-col-info{
-  width: 60%;
+  width: 100%;
 }
 
 .search-card-col-info table{
@@ -147,5 +148,11 @@
     -moz-transform: scale(1.3);
     -o-transform: scale(1.3);
     transform: scale(1.3);
+}
+.search-card{
+  flex-direction: row;
+}
+.search-card-col-info{
+  width: 60%;
 }
 }

@@ -3,6 +3,7 @@ import FileUploadWrapper from "../FileUploadWrapper";
 import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
 import { Link } from "react-router-dom";
+import { ButtonToolbar } from "react-bootstrap";
 
 export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
@@ -18,24 +19,47 @@ export const Stage = (props: { stage: string }) => {
     setSearchSerial(iqms);
   }
   const verificarEmbarque = () => {
-    if(searchSerial !== 0 ){
-      console.log(`/etiqueta/${props.stage.toLowerCase()}`)
+    if (searchSerial !== 0) {
+      console.log(`/etiqueta/${props.stage}`);
       return (
-        <>
-          <Link to={`/etiqueta/${props.stage.toLowerCase()}`}>
-            <button className="print-button">Imprimir Etiqueta</button>
-          </Link>
-        </>
+        <div className="button-container">
+          <Link className="upload-button-stage" to={`/etiqueta/${props.stage}`}>
+          <button className="upload-button-label">Imprimir Etiqueta</button>
+        </Link>
+
+        </div>
+      
       );
     }
-    console.log("No es igual")
+    console.log("No es igual");
     return null;
+  };
+  const botonEtiqueta = () => {
+    if(searchSerial==0){ 
+      return (
+      <>
+       <button className="upload-button">Validar </button>
+      </>
+    
+    );
+      
+
+    }else{
+      return (
+        <>
+         {verificarEmbarque()}
+        </>
+      
+      );
+    }
+     
     
   };
+  
   useEffect(() => {
-    console.log("searchSerial updated: "+ searchSerial);
-    console.log("Props stage: "+  props.stage);
-    console.log("catalogolocalstage: "+ catalogo);
+    console.log("searchSerial updated: " + searchSerial);
+    console.log("Props stage: " + props.stage);
+    console.log("catalogolocalstage: " + catalogo);
   }, [searchSerial]);
 
   /*useEffect(() => {
@@ -76,7 +100,7 @@ export const Stage = (props: { stage: string }) => {
   return (
     <div>
       <main className="incoming">
-        {props.stage != "/embarque" && (
+        {props.stage != "Embarque" && (
           <section>
             <>
               <h3 className="step-title">Búsqueda del producto</h3>
@@ -125,24 +149,35 @@ export const Stage = (props: { stage: string }) => {
         </section>
 
         <section>
-          <h3 className="step-title">Comparar </h3>
-          {props.stage == "Empaquetado" &&
-            catalogo == "Queretaro" && (
-              <>
-                <button className="upload-button" onClick={verificarEmbarque}>
-                  Verificar
-                </button>
-              </>
-            )}
-          {props.stage == "Incoming" ||
-            props.stage == "Embarque" && (
-              <>
-                <FileUploadWrapper
-                  stage={props.stage}
-                  iqms_serial={(searchSerial ?? "0").toString()}
-                />
-              </>
-            )}
+          {props.stage == "Empaquetado" && catalogo == "Queretaro" && (
+            <>
+              {verificarEmbarque()}
+            </>
+          )}
+          {props.stage == "Empaquetado" && catalogo == "USA" && (
+            <>
+              {verificarEmbarque()}
+            </>
+          )}
+          {props.stage == "Incoming" && (
+            <>
+              <h3 className="step-title">Comparar </h3>
+              <FileUploadWrapper
+                stage={props.stage}
+                iqms_serial={(searchSerial ?? "0").toString()}
+              />
+            </>
+          )}
+
+          {props.stage == "Embarque" && (
+            <>
+              <h3 className="step-title">Comparar </h3>
+              <FileUploadWrapper
+                stage={props.stage}
+                iqms_serial={(searchSerial ?? "0").toString()}
+              />
+            </>
+          )}
         </section>
       </main>
     </div>
