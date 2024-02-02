@@ -3,6 +3,7 @@ import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
 import Catalogo_USA_QRO_Gateway from "../../gateways/Catalogo_USA_QRO_Gateway";
 import "./Search.css";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 interface CatalogoItemChina {
   iqms_aka: number;
@@ -14,11 +15,14 @@ interface CatalogoItemChina {
 
 const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
   let catalogoGateway = new CatalogoChinaGateway();
+  
 
   const [busquedaIQMS, setBusquedaIQMS] = useState<string>("");
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItemChina | null>(null);
+
+  
 
   const buscarPorIQMS2 = async () => {
     try {
@@ -41,6 +45,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
       if (resultado !== undefined) {
         setResultadoBusqueda(resultado);
         onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
+        //verificarEmbarque();
       }
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
@@ -155,6 +160,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
                 )}
               </aside>
             </section>
+           
           </div>
         )}
       </section>
@@ -180,7 +186,9 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItem_USA_QRO | null>(null);
-  //const [searchType, setSearchType] = useState<string>("iqms1"); // Default to searching by both
+    const stage = window.location.pathname;
+  const stage1 = window.location.hash.substring(1);
+  console.log("Stage->"+stage, "Stage1->"+stage1);
 
   const buscarPorIQMS = async () => {
     try {
@@ -323,9 +331,18 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
                 )}
               </aside>
             </section>
+            
+            {resultadoBusqueda && (
+            <div className="button-container">
+              <Link className="upload-button-stage" to={`/etiqueta/${stage1}`}>
+                <button className="upload-button-label">Validar</button>
+              </Link>
+            </div>
+          )}
           </div>
         )}
       </section>
+     
     </>
   );
 };
