@@ -36,13 +36,30 @@ const Impresion: React.FC = () => {
       const win = window.open("", "_blank");
       if (win) {
         win.document.write(
-          `<html><head><title>Print Image</title></head><body style="margin: 0;"><img src="${labelImage()}" style="width: 100%; height: auto;" onload="window.print();window.close()" /></body></html>`
+          `<html><head><title>Print Image</title></head><body style="margin: 0;"><img src="${labelImage()}" style="width: 50%; height: auto;" onload="window.print();window.close()" /></body></html>`
         );
         win.document.close();
       }
     };
   };
-
+  const printImage2 = () => {
+    const image = new Image();
+    image.src = labelImage();
+    image.onload = () => {
+      const printWindow = window.open("", "_blank");
+      if (printWindow) {
+        printWindow.document.write(
+          `<html><head><title>Print Image</title></head><body style="margin: 0;"><img src="${labelImage()}" style="width: auto; height: 100%;" /></body></html>`
+        );
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.onafterprint = () => {
+          printWindow.close();
+        };
+      }
+    };
+  };
+  
   const handleSuccess = () => {
     Swal.fire({
       title: "Proceso Exitoso",

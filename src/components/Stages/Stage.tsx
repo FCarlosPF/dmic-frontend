@@ -3,7 +3,6 @@ import FileUploadWrapper from "../FileUploadWrapper";
 import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
 import { Link } from "react-router-dom";
-import { ButtonToolbar } from "react-bootstrap";
 
 export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
@@ -24,7 +23,7 @@ export const Stage = (props: { stage: string }) => {
       return (
         <div className="button-container">
           <Link className="upload-button-stage" to={`/etiqueta/${props.stage}`}>
-          <button className="upload-button-label">Imprimir Etiqueta</button>
+          <button className="upload-button-label">Validar</button>
         </Link>
 
         </div>
@@ -34,27 +33,7 @@ export const Stage = (props: { stage: string }) => {
     console.log("No es igual");
     return null;
   };
-  const botonEtiqueta = () => {
-    if(searchSerial==0){ 
-      return (
-      <>
-       <button className="upload-button">Validar </button>
-      </>
-    
-    );
-      
-
-    }else{
-      return (
-        <>
-         {verificarEmbarque()}
-        </>
-      
-      );
-    }
-     
-    
-  };
+  
   
   useEffect(() => {
     console.log("searchSerial updated: " + searchSerial);

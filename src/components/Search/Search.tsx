@@ -3,7 +3,6 @@ import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
 import Catalogo_USA_QRO_Gateway from "../../gateways/Catalogo_USA_QRO_Gateway";
 import "./Search.css";
 import Swal from "sweetalert2";
-import SearchCard from "./SearchCard";
 
 interface CatalogoItemChina {
   iqms_aka: number;
