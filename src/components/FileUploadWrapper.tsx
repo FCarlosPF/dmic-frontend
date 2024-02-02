@@ -6,7 +6,6 @@ import FileUpload2 from "./FileUpload2";
 
 const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
   console.log("props.stageWrapper-> " + props.stage);
-  //const navigate = useNavigate();
 
   // const [responseValues, setResponseValues] = useState<string[]>([]);
   //const [scannedCode1, setScannedCode1] = useState<string>("");
@@ -88,6 +87,7 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
       responseValues2.length > 0 &&
       responseValues1[0] === responseValues2[0]
     ) {
+      
       return (
         <>
           <p style={{ fontSize: "larger" }}>
@@ -100,15 +100,16 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
       );
     } else if (
       responseValues1.length > 0 &&
-      responseValues2.length > 0 &&
-      responseValues1[0] !== responseValues2[0]
-    ) {
+      responseValues2.length > 0 )
+      {
       setResponseValues2((prevValues) => prevValues.slice(1));
 
       console.log("error responseValues1[0]: " + responseValues1[0]);
       console.log("error responseValues1[1]: " + responseValues1[1]);
       console.log("error responseValues2[0]: " + responseValues2[0]);
       console.log("error responseValues2[1]: " + responseValues2[1]);
+      console.log("error responseValues1: " + responseValues1);
+      console.log("error responseValues2: " + responseValues2);
       console.log("lenght1: " + responseValues1.length);
       console.log("lenght2: " + responseValues2.length);
 

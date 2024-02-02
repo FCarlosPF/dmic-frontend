@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import FileUploadWrapper from "../FileUploadWrapper";
 import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
-import { Link } from "react-router-dom";
-import { ButtonToolbar } from "react-bootstrap";
 
 export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
@@ -24,7 +23,7 @@ export const Stage = (props: { stage: string }) => {
       return (
         <div className="button-container">
           <Link className="upload-button-stage" to={`/etiqueta/${props.stage}`}>
-          <button className="upload-button-label">Imprimir Etiqueta</button>
+          <button className="upload-button-label">Validar</button>
         </Link>
 
         </div>
@@ -34,7 +33,7 @@ export const Stage = (props: { stage: string }) => {
     console.log("No es igual");
     return null;
   };
-  const botonEtiqueta = () => {
+/*const botonEtiqueta = () => {
     if(searchSerial==0){ 
       return (
       <>
@@ -54,7 +53,7 @@ export const Stage = (props: { stage: string }) => {
     }
      
     
-  };
+  };*/
   
   useEffect(() => {
     console.log("searchSerial updated: " + searchSerial);
@@ -62,41 +61,7 @@ export const Stage = (props: { stage: string }) => {
     console.log("catalogolocalstage: " + catalogo);
   }, [searchSerial]);
 
-  /*useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: false })
-      .then((stream) => {
-        console.log(stream)
-        setHasPermissions(true);
-      })
-      .catch((error) => {
-        setHasPermissions(false);
-        console.error(error);
-      });
-  }, []);
-
-  const handleScan = (barcode: string) => {
-    if (!scannedBarcode1) {
-      setScannedBarcode1(barcode);
-      console.log("codigoStage1" + barcode);
-      setTimeout(() => {
-        setActivateSecondScanner(true);
-        setActivateFirstScanner(false);
-      }, 2000);
-    }
-    console.log("second?", activateSecondScanner);
-    console.log("first?", activateSecondScanner); 
-  };
-
-   const handleScan2 = (barcode: string) => {
-    if (scannedBarcode1) {
-      setScannedBarcode2(barcode);
-      console.log("codigoStage2" + barcode);
-      setActivateSecondScanner(false);
-      setActivateFirstScanner(true);
-    }
-  };*/
-
+  
   return (
     <div>
       <main className="incoming">
@@ -128,24 +93,6 @@ export const Stage = (props: { stage: string }) => {
           </section>
         )}
         <section>
-          {/*<h3 className="step-title">Escanear con el codigo de barras</h3>
-          {activateFirstScanner && <BarcodeScanner onScan={handleScan} />}
-          {scannedBarcode1 ? (
-            <p>
-              Producto encontrado con el código de barras: {scannedBarcode1}
-            </p>
-          ) : (
-            <p>Aún no ha escaneado un código de barras.</p>
-          )}
-          { activateSecondScanner && <BarcodeScanner2 onScan={handleScan2} />}
-          {scannedBarcode2 ? (
-            <p>
-              Producto encontrado con el segundo código de barras:{" "}
-              {scannedBarcode2}
-            </p>
-          ) : (
-            <p>Aún no ha escaneado el segundo código de barras.</p>
-          )} */}
         </section>
 
         <section>

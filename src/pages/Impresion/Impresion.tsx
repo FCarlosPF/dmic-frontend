@@ -36,7 +36,7 @@ const Impresion: React.FC = () => {
       const win = window.open("", "_blank");
       if (win) {
         win.document.write(
-          `<html><head><title>Print Image</title></head><body style="margin: 0;"><img src="${labelImage()}" style="width: 100%; height: auto;" onload="window.print();window.close()" /></body></html>`
+          `<html><head><title>Print Image</title></head><body style="margin: 0;"><img src="${labelImage()}" style="width: 284px; height: 192px;" onload="window.print();window.close()" /></body></html>`
         );
         win.document.close();
       }

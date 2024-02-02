@@ -15,7 +15,7 @@ class LoginGateway {
   private baseURL: string;
 
 
-  constructor(baseURL: string = "http://localhost:3000/auth") {
+  constructor(baseURL: string = "http://192.168.0.8:3000/auth") {
     this.baseURL = baseURL;
   }
 

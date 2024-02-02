@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
 interface CatalogoItem {
-  iqms_aka: number;
+  iqms_aka:number;
   iqms_dg: number;
   molde: string;
   imagen: any;
@@ -12,7 +12,7 @@ class CatalogoChinaGateway {
 
 
   
-  constructor(baseURL: string = "http://localhost:3000/catalogoChina") {
+  constructor(baseURL: string = "http://192.168.0.8:3000/catalogoChina") {
     this.baseURL = baseURL;
   }
 
@@ -29,7 +29,7 @@ class CatalogoChinaGateway {
   }
 
   // Obtener un elemento por su ID
-  async getById(iqms: number): Promise<CatalogoItem> {
+  async getById(iqms:string): Promise<CatalogoItem> {
     try {
       const response = await axios.get<CatalogoItem>(`${this.baseURL}/iqms/${iqms}`);
       console.log(response)

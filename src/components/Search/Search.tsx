@@ -1,9 +1,8 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import CatalogoChinaGateway from "../../gateways/CatalogoChinaGateway";
 import Catalogo_USA_QRO_Gateway from "../../gateways/Catalogo_USA_QRO_Gateway";
 import "./Search.css";
-import Swal from "sweetalert2";
-import SearchCard from "./SearchCard";
 
 interface CatalogoItemChina {
   iqms_aka: number;
@@ -23,7 +22,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
 
   const buscarPorIQMS2 = async () => {
     try {
-      const resultado = await catalogoGateway.getById(parseInt(busquedaIQMS));
+      const resultado = await catalogoGateway.getById(busquedaIQMS);
       console.log(resultado);
       setResultadoBusqueda(resultado);
       onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
@@ -112,7 +111,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
       <hr />
       <section className="contenedor-table-catalogo">
         {resultadoBusqueda && (
-          <div>
+          <div className="table-catalogo-search">
             <h2 className="catalogoChina-title">Resultado de la Búsqueda</h2>
             <section className="search-card">
               <aside className="search-card-col-info">
@@ -332,3 +331,4 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
 };
 
 export { SearchChina, Search__USA_QRO };
+
