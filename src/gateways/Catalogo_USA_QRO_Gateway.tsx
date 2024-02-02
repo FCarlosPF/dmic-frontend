@@ -14,7 +14,7 @@ class Catalogo_USA_QRO_Gateway {
   private baseURL: string;
 
 
-  constructor(baseURL: string = "http://192.168.0.8:3000/producto-queretaro") {
+  constructor(baseURL: string = "http://10.5.1.14:3000/producto-queretaro") {
     this.baseURL = baseURL;
   }
 

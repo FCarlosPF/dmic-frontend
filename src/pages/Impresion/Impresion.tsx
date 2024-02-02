@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import label1 from "../../assets/img/Etiqueta 1_page-0001.jpg";
@@ -6,90 +6,88 @@ import label3 from "../../assets/img/Etiqueta 3_page-0001.jpg";
 import label2 from "../../assets/img/Etiqueta2.png";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
+import { useReactToPrint } from "react-to-print";
 import "./Impresion.css";
 
+const PrintableContent = (props:{labelImage :any}) => (
+  <div className="printable" style={{ pageBreakAfter: 'always'}}>
+    <img className="printable-img" src={props.labelImage} alt="Imagen a imprimir" />
+  </div>
+);
 
 const Impresion: React.FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { stage } = useParams();
-  console.log(stage)
+  const componentRef = useRef(null);
 
   const catalogo = localStorage.getItem("catalogo");
-  console.log(catalogo, stage);
-
 
   function labelImage() {
-
-    if (stage == "Incoming") {
-      return label1
-    } else if (stage == "Empaquetado") {
-      return label2
-    } else
-      return label3
-
+    if (stage === "Incoming") {
+      return label1;
+    } else if (stage === "Empaquetado") {
+      return label2;
+    } else {
+      return label3;
+    }
   }
-
-  const printImage = () => {
-    const image = new Image();
-    image.src = labelImage();
-    image.onload = () => {
-      const win = window.open("", "_blank");
-      if (win) {
-        win.document.write(
-          `<html><head><title>Print Image</title></head><body style="margin: 0;"><img src="${labelImage()}" style="width: 284px; height: 192px;" onload="window.print();window.close()" /></body></html>`
-        );
-        win.document.close();
-      }
-    };
-  };
 
   const handleSuccess = () => {
     Swal.fire({
       title: "Proceso Exitoso",
       text: "Proceso completado con éxito",
-      icon: "success"
+      icon: "success",
     });
   };
 
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
 
-  function NextStage() {
+    pageStyle: `
+    @page {
+      size: 2.84in 4in; /* Puede cambiar 'auto' a 'letter' u otro tamaño si es necesario */
+      margin: auto; /* Puede ajustar los márgenes según sea necesario */
+      orientation: landscape; /* Cambiar a 'portrait' si se desea orientación vertical */
+    }
+  `,
+  });
+
+  const handleNextStage = () => {
     switch (catalogo) {
       case "USA":
         handleSuccess();
-        navigate('/usasteps');
+        navigate("/usasteps");
         break;
 
       case "China":
         handleSuccess();
-        navigate('/chinasteps');
+        navigate("/chinasteps");
         break;
 
       case "Queretaro":
         handleSuccess();
-        navigate('/queretarosteps');
+        navigate("/queretarosteps");
         break;
 
       default:
         break;
     }
-  }
+  };
 
   return (
     <>
       <Header />
       <Title text="Imprimir etiqueta" />
       <div className="print-container">
-        <img
-          id="imageToPrint"
-          src={labelImage()}
-          alt="Imagen a imprimir"
-          style={{ display: "none" }}
-        />
-        <button className="print-button" onClick={printImage}>
+        <div ref={componentRef}>
+          <PrintableContent labelImage={labelImage()} />
+        </div>
+
+        <button className="print-button" onClick={handlePrint}>
           Imprimir
         </button>
 
-        <button className="print-button" onClick={NextStage}>
+        <button className="print-button" onClick={handleNextStage}>
           Siguiente
         </button>
       </div>

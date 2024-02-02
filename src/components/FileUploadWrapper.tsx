@@ -11,17 +11,17 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
   //const [scannedCode1, setScannedCode1] = useState<string>("");
   //const [scannedCode2, setScannedCode2] = useState<string>("");
 
-  const [responseValues1, setResponseValues1] = useState<string[]>([]);
-  const [responseValues2, setResponseValues2] = useState<string[]>([]);
+  const [responseValues1, setResponseValues1] = useState<string>("");
+  const [responseValues2, setResponseValues2] = useState<string>("");
   const [, setSearchSerial] = useState<string>("");
   let catalogo = localStorage.getItem("catalogo");
 
   const onFileUpload1 = (responseValue: string) => {
-    setResponseValues1([responseValue]);
+    setResponseValues1(responseValue);
   };
 
   const onFileUpload2 = (responseValue: string) => {
-    setResponseValues2([responseValue]);
+    setResponseValues2(responseValue);
   };
 
   /* const handleUpload1 = (scannedCode1: string) => {
@@ -46,8 +46,8 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
 
   useEffect(() => {
     console.log("IqmsWrapper-> " + props.iqms_serial);
-    console.log(" responseValues[0]: " + responseValues1[0]);
-    console.log(" responseValues[1]: " + responseValues2[1]);
+    console.log(" responseValues1: " + responseValues1);
+    console.log(" responseValues2: " + responseValues2);
     console.log("lenght1: " + responseValues1.length);
     console.log("lenght2: " + responseValues2.length);
     setSearchSerial(props.iqms_serial);
@@ -85,7 +85,7 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
     if (
       responseValues1.length > 0 &&
       responseValues2.length > 0 &&
-      responseValues1[0] === responseValues2[0]
+      responseValues1 === responseValues2
     ) {
       
       return (
@@ -100,16 +100,13 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
       );
     } else if (
       responseValues1.length > 0 &&
-      responseValues2.length > 0 )
-      {
-      setResponseValues2((prevValues) => prevValues.slice(1));
+      responseValues2.length > 0 &&
+      responseValues1 !== responseValues2
+    ) {
+      //setResponseValues2((prevValues) => prevValues.slice(1));
 
       console.log("error responseValues1[0]: " + responseValues1[0]);
-      console.log("error responseValues1[1]: " + responseValues1[1]);
       console.log("error responseValues2[0]: " + responseValues2[0]);
-      console.log("error responseValues2[1]: " + responseValues2[1]);
-      console.log("error responseValues1: " + responseValues1);
-      console.log("error responseValues2: " + responseValues2);
       console.log("lenght1: " + responseValues1.length);
       console.log("lenght2: " + responseValues2.length);
 

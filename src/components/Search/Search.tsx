@@ -180,6 +180,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItem_USA_QRO | null>(null);
+    const [exist, setExist] = useState<boolean | null>();
   //const [searchType, setSearchType] = useState<string>("iqms1"); // Default to searching by both
 
   const buscarPorIQMS = async () => {
@@ -187,6 +188,8 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
       const resultado = await catalogoGateway.getById(parseInt(busquedaIQMS));
       setResultadoBusqueda(resultado);
       if (resultado.iqms1 == null) {
+        setExist(false)
+        localStorage.setItem("exist", "no");
         Swal.fire({
           title: "Producto no encontrado",
           text: "No se encontró ningún producto con el IQMS proporcionado.",
@@ -194,6 +197,9 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Aceptar",
         });
+      }else{
+        setExist(true)
+        localStorage.setItem("exist", "si");
       }
 
       console.log(
@@ -213,9 +219,10 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
     try {
       const resultado = await catalogoGateway.getByMolde(busquedaMolde);
       setResultadoBusqueda(resultado);
-      onSearch && onSearch(resultado.iqms1, resultado.iqms2);
       console.log("Resultado de la búsqueda:", resultado);
-      resultado.iqms1 == null &&
+      if (resultado.iqms1 == null) {
+        setExist(false)
+        localStorage.setItem("exist", "no");
         Swal.fire({
           title: "Producto no encontrado",
           text: "No se encontró ningún producto con el molde proporcionado.",
@@ -223,6 +230,12 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Aceptar",
         });
+      }else{
+        setExist(true)
+        localStorage.setItem("exist", "si");
+      }
+      onSearch && onSearch(resultado.iqms1, resultado.iqms2);
+
     } catch (error) {
       console.error("Error al realizar la búsqueda por Molde:", error);
     }

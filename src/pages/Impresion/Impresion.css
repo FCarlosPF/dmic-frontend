@@ -16,3 +16,12 @@
     width: 50%;
     margin: 2%;
   }
+
+  .printable{
+    display: flex;
+    justify-content: center;
+    margin: 2% 0 2% 0;
+  }
+.printable-img{
+    width: 90%;
+}

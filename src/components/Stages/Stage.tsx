@@ -4,6 +4,7 @@ import FileUploadWrapper from "../FileUploadWrapper";
 import { SearchChina, Search__USA_QRO } from "../Search/Search";
 import "./Stage.css";
 
+
 export const Stage = (props: { stage: string }) => {
   const stage = window.location.pathname;
   const stage1 = window.location.hash.substring(1);
@@ -18,7 +19,7 @@ export const Stage = (props: { stage: string }) => {
     setSearchSerial(iqms);
   }
   const verificarEmbarque = () => {
-    if (searchSerial !== 0) {
+    if (searchSerial !== 0 ) {
       console.log(`/etiqueta/${props.stage}`);
       return (
         <div className="button-container">
@@ -33,27 +34,7 @@ export const Stage = (props: { stage: string }) => {
     console.log("No es igual");
     return null;
   };
-/*const botonEtiqueta = () => {
-    if(searchSerial==0){ 
-      return (
-      <>
-       <button className="upload-button">Validar </button>
-      </>
-    
-    );
-      
-
-    }else{
-      return (
-        <>
-         {verificarEmbarque()}
-        </>
-      
-      );
-    }
-     
-    
-  };*/
+  
   
   useEffect(() => {
     console.log("searchSerial updated: " + searchSerial);
