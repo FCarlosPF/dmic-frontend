@@ -8,27 +8,26 @@ import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import { useReactToPrint } from "react-to-print";
 import "./Impresion.css";
+import { QRCodeCanvas } from 'qrcode.react';
+import Label from "./Label";
 
-const PrintableContent = (props:{labelImage :any}) => (
-  <div className="printable" style={{ pageBreakAfter: 'always'}}>
-    <img className="printable-img" src={props.labelImage} alt="Imagen a imprimir" />
-  </div>
-);
+
 
 const Impresion: React.FC = () => {
   const navigate = useNavigate();
   const { stage } = useParams();
+  console.log(stage)
   const componentRef = useRef(null);
 
   const catalogo = localStorage.getItem("catalogo");
 
-  function labelImage() {
+  function label() {
     if (stage === "Incoming") {
-      return label1;
+      return "1";
     } else if (stage === "Empaquetado") {
-      return label2;
+      return "2";
     } else {
-      return label3;
+      return "3";
     }
   }
 
@@ -80,7 +79,7 @@ const Impresion: React.FC = () => {
       <Title text="Imprimir etiqueta" />
       <div className="print-container">
         <div ref={componentRef}>
-          <PrintableContent labelImage={labelImage()} />
+          <Label stageNumber={label} />
         </div>
 
         <button className="print-button" onClick={handlePrint}>

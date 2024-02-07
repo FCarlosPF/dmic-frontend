@@ -14,11 +14,14 @@ interface CatalogoItemChina {
 
 const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
   let catalogoGateway = new CatalogoChinaGateway();
+  
 
   const [busquedaIQMS, setBusquedaIQMS] = useState<string>("");
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItemChina | null>(null);
+
+  
 
   const buscarPorIQMS2 = async () => {
     try {
@@ -41,6 +44,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
       if (resultado !== undefined) {
         setResultadoBusqueda(resultado);
         onSearch && onSearch(resultado.iqms_aka, resultado.iqms_dg);
+        //verificarEmbarque();
       }
     } catch (error) {
       console.error("Error al realizar la búsqueda por IQMS:", error);
@@ -155,6 +159,7 @@ const SearchChina: React.FC<CatalogoItemChina> = ({ onSearch }) => {
                 )}
               </aside>
             </section>
+           
           </div>
         )}
       </section>
@@ -180,15 +185,16 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
   const [busquedaMolde, setBusquedaMolde] = useState<string>("");
   const [resultadoBusqueda, setResultadoBusqueda] =
     useState<CatalogoItem_USA_QRO | null>(null);
-    const [exist, setExist] = useState<boolean | null>();
-  //const [searchType, setSearchType] = useState<string>("iqms1"); // Default to searching by both
+    const stage = window.location.pathname;
+  const stage1 = window.location.hash.substring(1);
+  console.log("Stage->"+stage, "Stage1->"+stage1);
 
   const buscarPorIQMS = async () => {
     try {
       const resultado = await catalogoGateway.getById(parseInt(busquedaIQMS));
       setResultadoBusqueda(resultado);
       if (resultado.iqms1 == null) {
-        setExist(false)
+       // setExist(false)
         localStorage.setItem("exist", "no");
         Swal.fire({
           title: "Producto no encontrado",
@@ -198,7 +204,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
           confirmButtonText: "Aceptar",
         });
       }else{
-        setExist(true)
+        //setExist(true)
         localStorage.setItem("exist", "si");
       }
 
@@ -221,7 +227,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
       setResultadoBusqueda(resultado);
       console.log("Resultado de la búsqueda:", resultado);
       if (resultado.iqms1 == null) {
-        setExist(false)
+        //setExist(false)
         localStorage.setItem("exist", "no");
         Swal.fire({
           title: "Producto no encontrado",
@@ -231,7 +237,7 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
           confirmButtonText: "Aceptar",
         });
       }else{
-        setExist(true)
+       // setExist(true)
         localStorage.setItem("exist", "si");
       }
       onSearch && onSearch(resultado.iqms1, resultado.iqms2);
@@ -336,9 +342,11 @@ const Search__USA_QRO: React.FC<CatalogoItem_USA_QRO> = ({ onSearch }) => {
                 )}
               </aside>
             </section>
+          
           </div>
         )}
       </section>
+     
     </>
   );
 };
