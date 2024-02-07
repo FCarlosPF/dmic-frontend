@@ -12,6 +12,7 @@ import Incoming from "./pages/Incoming/Incoming";
 import { Login } from "./pages/Login/Login";
 import { QueretaroSteps } from "./pages/QueretaroSteps/QueretaroSteps";
 import { USASteps } from "./pages/USASteps/USASteps";
+import { DashboardQr } from "./pages/DashboardQr/DashboardQr";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/chinasteps" element={<ChinaSteps />} />
         <Route path="/queretarosteps" element={<QueretaroSteps />} />
         <Route path="/usasteps" element={<USASteps />} />
+        <Route path="/qrconsulta" element={<DashboardQr />} />
       </Routes>
     </>
   );
