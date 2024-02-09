@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { SearchQr } from "../../components/SearchQr/SearchQr";
 import "../../components/Stages/Stage.css";
+import Header from "../../components/Header/Header";
+import Title from "../../components/Title/Title";
 
 export const DashboardQr = () => {
   const stage = window.location.pathname;
@@ -25,10 +27,11 @@ export const DashboardQr = () => {
 
   return (
     <div>
+      <Header />
+      <Title text="Consultas"/>
       <main className="incoming">
         <section>
-          <>
-            <h3 className="step-title">Búsqueda del producto</h3>
+          <h3 className="step-title-qr">Búsqueda del QR</h3>
 
             <SearchQr
               onSearch={handleSearch}
@@ -40,7 +43,7 @@ export const DashboardQr = () => {
               catalogo={""}
               stage={""}
             />
-          </>
+          
         </section>
 
         <section></section>

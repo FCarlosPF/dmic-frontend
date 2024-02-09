@@ -145,6 +145,17 @@
   display: flex;
   flex-direction: column;
 }
+.qr-select-catalogo{
+  width: 100%;
+  padding: 1%;
+}
+.search-select-input{
+  display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    margin-bottom: 10px;
+    width: 100%;
+}
 
 
 @media screen and (min-width: 700px) {

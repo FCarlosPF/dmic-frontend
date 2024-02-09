@@ -55,8 +55,18 @@ class TrazabilidadGateway {
 
     async getByDetail(stage : string, catalogo : string): Promise<Trazabilidad> {
       try {
-        const response: AxiosResponse<Trazabilidad> = await axios.get(`${this.baseURL}/qr-consulta/iqms-search/?stage=${stage}?catalogo=${catalogo}`);
+        if(stage && catalogo){
+          const response: AxiosResponse<Trazabilidad> = await axios.get(`${this.baseURL}/qr-consulta/iqms-search?stage=${stage}?catalogo=${catalogo}`);
+          return response.data;
+        } else if (!stage){
+          const response: AxiosResponse<Trazabilidad> = await axios.get(`${this.baseURL}/qr-consulta/iqms-search?catalogo=${catalogo}`);
         return response.data;
+          
+        }
+          const response: AxiosResponse<Trazabilidad> = await axios.get(`${this.baseURL}/qr-consulta/iqms-search?stage=${stage}`);
+        return response.data;
+          
+        
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
           const axiosError = error as AxiosError;

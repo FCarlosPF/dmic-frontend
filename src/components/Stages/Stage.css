@@ -10,6 +10,10 @@
     font-weight: 900;
     margin: 2% 0 2% 0;
 }
+.step-title{
+    align-items: center;
+
+}
 
 .button-container{
     display: flex;
