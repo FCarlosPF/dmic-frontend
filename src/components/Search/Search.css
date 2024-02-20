@@ -157,6 +157,22 @@
     width: 100%;
 }
 
+.horizontal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.horizontal-table th {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.horizontal-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
 
 @media screen and (min-width: 700px) {
   .search-card-col-img img:hover {

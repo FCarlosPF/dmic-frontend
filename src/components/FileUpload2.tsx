@@ -19,10 +19,21 @@ const FileUpload2: React.FC<FileUploadProps2> = ({ onUpload }) => {
   const onUploads = async () => {
     try {
       if (textInput && textInput !== "0") {
+        const regex = /PN(\S+)/;
+        const match = textInput.match(regex);
+        console.log("match-:>"+match);
+        if (match) {
+        // Si se encuentra una coincidencia con la expresión regular
+          const extractedValue = match[0]; // La coincidencia capturada está en el grupo 1
+          setTextInput(extractedValue);
+          setResponseValue(extractedValue);
+          onUpload(extractedValue);
+          console.log("Número serial extraído (desde texto):", extractedValue);
+        } else {
         setResponseValue(textInput);
         onUpload(textInput);
         console.log("Número serial extraído (desde texto):", textInput);
-
+        }
       } else {
         console.error(
           "No se ha seleccionado ningún archivo ni se ha ingresado texto."

@@ -119,41 +119,35 @@ const SearchQr: React.FC<QrItemConsulta> = ({ onSearch }) => {
             <h2 className="catalogoChina-title">Resultado de la Búsqueda</h2>
             <section className="search-card">
               <aside className="search-card-col-info">
-                <table>
-                  <thead>
-                    <tr>
-                      <th className="table-header">ID CONSULTA</th>
-                      <th className="table-header">HORA</th>
-                      <th className="table-header">FECHA</th>
-                      <th className="table-header">ID USUARIO</th>
-                      <th className="table-header">IQMS</th>
-                      <th className="table-header">CATALOGO</th>
-                      <th className="table-header">STAGE</th>
-                    </tr>
-                  </thead>
+                <table className="horizontal-table">
                   <tbody>
                     <tr>
-                      <td className="table-element">
-                        {resultadoBusqueda.id_consulta}
-                      </td>
-                      <td className="table-element">
-                        {resultadoBusqueda.hora}
-                      </td>
-                      <td className="table-element">
-                        {resultadoBusqueda.fecha}
-                      </td>
-                      <td className="table-element">
-                        {resultadoBusqueda.id_user}
-                      </td>
-                      <td className="table-element">
-                        {resultadoBusqueda.iqms}
-                      </td>
-                      <td className="table-element">
-                        {resultadoBusqueda.catalogo}
-                      </td>
-                      <td className="table-element">
-                        {resultadoBusqueda.stage}
-                      </td>
+                      <th>ID CONSULTA</th>
+                      <td>{resultadoBusqueda.id_consulta}</td>
+                    </tr>
+                    <tr>
+                      <th>HORA</th>
+                      <td>{resultadoBusqueda.hora}</td>
+                    </tr>
+                    <tr>
+                      <th>FECHA</th>
+                      <td>{resultadoBusqueda.fecha}</td>
+                    </tr>
+                    <tr>
+                      <th>ID USUARIO</th>
+                      <td>{resultadoBusqueda.id_user}</td>
+                    </tr>
+                    <tr>
+                      <th>IQMS</th>
+                      <td>{resultadoBusqueda.iqms}</td>
+                    </tr>
+                    <tr>
+                      <th>CATALOGO</th>
+                      <td>{resultadoBusqueda.catalogo}</td>
+                    </tr>
+                    <tr>
+                      <th>STAGE</th>
+                      <td>{resultadoBusqueda.stage}</td>
                     </tr>
                   </tbody>
                 </table>

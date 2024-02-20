@@ -150,10 +150,8 @@ const FileUploadWrapper = (props: { stage: any; iqms_serial: string }) => {
         
         { props.stage == "Embarque"  && (
           <>
-            <FileUpload
+            <FileUpload2
               onUpload={(responseValue) => onFileUpload1(responseValue)}
-              serial={props.iqms_serial}
-              stage={props.stage}
             />
             <hr />
             <FileUpload2
